@@ -94,7 +94,7 @@ export default {
 }
 .product-item.product-item-horizontal .product-item-info {
   flex: 1;
-  max-width: 13.07142857rem;
+  max-width: 8.07142857rem;
   padding: 0 1.42857143rem;
   position: relative;
 }
@@ -119,7 +119,7 @@ img {
 .text-overflow-line2 {
   overflow: hidden;
   text-overflow: ellipsis;
-  
+  white-space: nowrap;
 }
 .product-item.product-item-horizontal .product-item-info-promo {
   margin-top: 0.85714286rem;
@@ -172,7 +172,7 @@ img {
   span {
     display: inline-flex;
     border-radius: 10rem;
-    border: 1px solid #FFF;
+    // border: 1px solid #FFF;
     color: #FF734C;
     font-size: 0.71428571rem;
     padding: 0 0.28571429rem;

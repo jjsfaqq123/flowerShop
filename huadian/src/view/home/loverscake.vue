@@ -1,7 +1,7 @@
 <template>
     <div>
       <section class="product">
-        <h3 class="product-title">永生花推荐</h3>
+        <h3 class="product-title">蛋糕推荐</h3>
         <div class="product-list product-list-vertical">
           <div class="product-item product-item-vertical" v-for="(eternals,index) in  eternal" :key="index">
             <router-link to="" class="navigation">
@@ -9,9 +9,9 @@
                 <img :src="eternals.eternal_img" alt="">
               </div>
               <div class="product-item-info">
-                <div class="product-item-info-tags">
+                <!-- <div class="product-item-info-tags">
                   <span>{{eternals.eternal_best}}</span>
-                </div>
+                </div> -->
                 <div class="product-item-info-name  text-overflow ">{{eternals.eternal_my}}</div>
                 <div class="product-item-info-bottom">
                   <div class="product-item-info-bottom-left">
@@ -40,18 +40,18 @@ export default {
     data() {
       return {
         eternal: [
-          { eternal_img:require('@/assets/img/body/1073185.jpg_220x240.jpg')
-          ,eternal_best:'畅销',eternal_my:'我如此爱你-口红款999·专柜正品Dior#999口红＋进口永生玫瑰礼盒',
-          eternal_original:'￥598',eternal_activity:'￥698',eternal_slod:'已销售6780件' },
-          { eternal_img:require('@/assets/img/body/1073264.jpg_220x240.jpg')
-          ,eternal_best:'创意新品',eternal_my:'一鹿(路)有你永生花小夜灯·永生花礼盒',
-          eternal_original:'¥298',eternal_activity:'¥398',eternal_slod:'已销售425件' },
-          { eternal_img:require('@/assets/img/body/1073247.jpg_220x240.jpg')
-          ,eternal_best:'热销单品',eternal_my:'花好月圆永生花台灯·精选进口奥斯汀永生玫瑰台灯',
-          eternal_original:'¥298',eternal_activity:'¥398',eternal_slod:'已销售1052件' },
-          { eternal_img:require('@/assets/img/body/1073033.jpg_220x240.jpg')
-          ,eternal_best:'爱的承诺',eternal_my:'一生一世·厄瓜多尔进口永生红玫1朵，双色永生绣球',
-          eternal_original:'¥198',eternal_activity:'¥259',eternal_slod:'已销售1.2万件' },
+          { eternal_img:require('@/assets/img/body/5181052.jpg_220x240.jpg')
+          ,eternal_best:'畅销',eternal_my:'蓝色星球（6寸）·',
+          eternal_original:'¥298',eternal_activity:'¥398',eternal_slod:'已销售120件' },
+          { eternal_img:require('@/assets/img/body/5231015.jpg_220x240.jpg')
+          ,eternal_best:'创意新品',eternal_my:'蒙布朗栗蓉奶油蛋糕（6寸）·奶油蛋糕',
+          eternal_original:'¥249',eternal_activity:'¥349',eternal_slod:'已销售5件' },
+          { eternal_img:require('@/assets/img/body/5302008.jpg_220x240.jpg')
+          ,eternal_best:'热销单品',eternal_my:'蝶恋花景(8寸)·元祖鲜奶蛋糕，布丁加水果夹层',
+          eternal_original:'¥258',eternal_activity:'¥358',eternal_slod:'已销售2558件' },
+          { eternal_img:require('@/assets/img/body/5013046.jpg_220x240.jpg')
+          ,eternal_best:'爱的承诺',eternal_my:'水果盛宴·3磅(10寸)水果蛋糕',
+          eternal_original:'¥239',eternal_activity:'¥239',eternal_slod:'已销售2955件' },
         ]
       }
     }
@@ -115,7 +115,7 @@ export default {
   }
   .text-overflow {
     overflow: hidden;
-    white-space: nowrap;
+    // white-space: nowrap;
     text-overflow: ellipsis;
   }
   .product-item.product-item-vertical .product-item-info-bottom {

@@ -1,7 +1,7 @@
 <template>
     <div>
       <section class="product">
-        <h3 class="product-title">永生花推荐</h3>
+        <h3 class="product-title">巧克力推荐</h3>
         <div class="product-list product-list-vertical">
           <div class="product-item product-item-vertical" v-for="(eternals,index) in  eternal" :key="index">
             <router-link to="" class="navigation">
@@ -9,9 +9,9 @@
                 <img :src="eternals.eternal_img" alt="">
               </div>
               <div class="product-item-info">
-                <div class="product-item-info-tags">
+                <!-- <div class="product-item-info-tags">
                   <span>{{eternals.eternal_best}}</span>
-                </div>
+                </div> -->
                 <div class="product-item-info-name  text-overflow ">{{eternals.eternal_my}}</div>
                 <div class="product-item-info-bottom">
                   <div class="product-item-info-bottom-left">
@@ -33,6 +33,20 @@
           <router-link to="" class="product-more-btn">查看跟多</router-link>
         </div>
       </section>
+      <section class="qiyetuangou">
+        <router-link to="">
+          <img src="@/assets/img/body/m_home_qiyetuangou.png" alt="" class="navigation">
+        </router-link>  
+      </section> 
+      <section class="brand">
+        <h3 class="brand-title">为什么要选择我们</h3>
+        <div class="brand-list">
+          <div class="brand-item" v-for="(selectmys,index) in selectmy" :key="index">
+            <img :src="selectmys.selectmy_img" alt=""> 
+            <p>{{selectmys.selectmy_what}}</p>
+          </div>
+        </div>
+      </section> 
     </div>
 </template>
 <script>
@@ -40,18 +54,26 @@ export default {
     data() {
       return {
         eternal: [
-          { eternal_img:require('@/assets/img/body/1073185.jpg_220x240.jpg')
-          ,eternal_best:'畅销',eternal_my:'我如此爱你-口红款999·专柜正品Dior#999口红＋进口永生玫瑰礼盒',
-          eternal_original:'￥598',eternal_activity:'￥698',eternal_slod:'已销售6780件' },
-          { eternal_img:require('@/assets/img/body/1073264.jpg_220x240.jpg')
-          ,eternal_best:'创意新品',eternal_my:'一鹿(路)有你永生花小夜灯·永生花礼盒',
-          eternal_original:'¥298',eternal_activity:'¥398',eternal_slod:'已销售425件' },
-          { eternal_img:require('@/assets/img/body/1073247.jpg_220x240.jpg')
-          ,eternal_best:'热销单品',eternal_my:'花好月圆永生花台灯·精选进口奥斯汀永生玫瑰台灯',
-          eternal_original:'¥298',eternal_activity:'¥398',eternal_slod:'已销售1052件' },
-          { eternal_img:require('@/assets/img/body/1073033.jpg_220x240.jpg')
-          ,eternal_best:'爱的承诺',eternal_my:'一生一世·厄瓜多尔进口永生红玫1朵，双色永生绣球',
-          eternal_original:'¥198',eternal_activity:'¥259',eternal_slod:'已销售1.2万件' },
+          { eternal_img:require('@/assets/img/body/1201003.jpg_220x240.jpg')
+          ,eternal_best:'礼盒装畅销款',eternal_my:'奢悦之美巧克力礼盒·夹心巧克力',
+          eternal_original:'¥158',eternal_activity:'¥358',eternal_slod:'已销售5062件' },
+          { eternal_img:require('@/assets/img/body/1204041.jpg_220x240.jpg')
+          ,eternal_best:'火热畅销款',eternal_my:'Felchlin妃亭16粒装巧克力礼盒·德国进口夹心手工巧克力',
+          eternal_original:'¥298',eternal_activity:'¥298',eternal_slod:'已销售3327件' },
+          { eternal_img:require('@/assets/img/body/1207010.jpg_220x240.jpg')
+          ,eternal_best:'新品',eternal_my:'迪奥口红#999+迪奥花漾淡香水30ml·口红+香水礼盒套装',
+          eternal_original:'¥288',eternal_activity:'¥388',eternal_slod:'已销售4621件' },
+          { eternal_img:require('@/assets/img/body/1204060.jpg_220x240.jpg')
+          ,eternal_best:'热销新品',eternal_my:'德国进口LAUENSTEIN巧克力手工松露酒味夹心金装礼盒·德国进口酒心黑巧克力20粒',
+          eternal_original:'¥318',eternal_activity:'¥418',eternal_slod:'已销售23件' },
+        ],
+        selectmy: [
+          { selectmy_img:require('@/assets/img/body/m_details_brand_01.png'), selectmy_what:'获评鲜花龙头企业'},
+          { selectmy_img:require('@/assets/img/body/m_details_brand_02.png'), selectmy_what:'1~3小时送花上门'},
+          { selectmy_img:require('@/assets/img/body/m_details_brand_03.png'), selectmy_what:'赛事冠军花艺师团队'},
+          { selectmy_img:require('@/assets/img/body/m_details_brand_04.png'), selectmy_what:'严选花材'},
+          { selectmy_img:require('@/assets/img/body/m_details_brand_05.png'), selectmy_what:'12道严苛品控标准'},
+          { selectmy_img:require('@/assets/img/body/m_details_brand_06.png'), selectmy_what:'500万用户信赖好评'},
         ]
       }
     }
@@ -155,6 +177,12 @@ export default {
     height: 0;
     clear: both;
 }
+.brand-list::after {
+  content: "";
+  display: block;
+  clear: both;
+  height: 0;
+}
 .product-more-btn {
   display: block;
   margin: 0 auto;
@@ -165,5 +193,32 @@ export default {
   text-align: center;
   line-height:1.71428571rem;
   border-radius: 0.14285714rem;
+}
+.brand {
+  background:#fff;
+  .brand-title {
+    font-size: 1.14285714rem;
+    padding: 1.42857143rem 0;
+    text-align: center;
+    font-weight: normal;
+  }
+}
+
+.brand-item {
+  float: left;
+  width: 33.33333333%;
+  text-align: center;
+  padding-bottom: 1.71428571rem;
+  img {
+    width: 4.571429rem;
+    height: 4.571429rem;
+  }
+  p {
+    font-size: 0.85714286rem;
+    margin-top: 0.28571429rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 </style>

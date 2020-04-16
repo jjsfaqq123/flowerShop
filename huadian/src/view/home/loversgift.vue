@@ -1,7 +1,7 @@
 <template>
     <div>
       <section class="product">
-        <h3 class="product-title">永生花推荐</h3>
+        <h3 class="product-title">礼品推荐</h3>
         <div class="product-list product-list-vertical">
           <div class="product-item product-item-vertical" v-for="(eternals,index) in  eternal" :key="index">
             <router-link to="" class="navigation">
@@ -40,18 +40,18 @@ export default {
     data() {
       return {
         eternal: [
-          { eternal_img:require('@/assets/img/body/1073185.jpg_220x240.jpg')
-          ,eternal_best:'畅销',eternal_my:'我如此爱你-口红款999·专柜正品Dior#999口红＋进口永生玫瑰礼盒',
-          eternal_original:'￥598',eternal_activity:'￥698',eternal_slod:'已销售6780件' },
-          { eternal_img:require('@/assets/img/body/1073264.jpg_220x240.jpg')
-          ,eternal_best:'创意新品',eternal_my:'一鹿(路)有你永生花小夜灯·永生花礼盒',
-          eternal_original:'¥298',eternal_activity:'¥398',eternal_slod:'已销售425件' },
-          { eternal_img:require('@/assets/img/body/1073247.jpg_220x240.jpg')
-          ,eternal_best:'热销单品',eternal_my:'花好月圆永生花台灯·精选进口奥斯汀永生玫瑰台灯',
-          eternal_original:'¥298',eternal_activity:'¥398',eternal_slod:'已销售1052件' },
-          { eternal_img:require('@/assets/img/body/1073033.jpg_220x240.jpg')
-          ,eternal_best:'爱的承诺',eternal_my:'一生一世·厄瓜多尔进口永生红玫1朵，双色永生绣球',
-          eternal_original:'¥198',eternal_activity:'¥259',eternal_slod:'已销售1.2万件' },
+          { eternal_img:require('@/assets/img/body/1070017.jpg_220x240.jpg')
+          ,eternal_best:'礼盒装畅销款',eternal_my:'天使之恋·高档精品化妆镜,天然深海母贝，彩白色的奥地利水钻',
+          eternal_original:'¥159',eternal_activity:'¥199',eternal_slod:'已销售1.8万件' },
+          { eternal_img:require('@/assets/img/body/1076062.jpg_220x240.jpg')
+          ,eternal_best:'火热畅销款',eternal_my:'星期耳钉礼盒·s925银个性耳钉',
+          eternal_original:'¥198',eternal_activity:'¥298',eternal_slod:'已销售1574件' },
+          { eternal_img:require('@/assets/img/body/1076049.jpg_220x240.jpg')
+          ,eternal_best:'新品',eternal_my:'迪奥口红#999+迪奥花漾淡香水30ml·口红+香水礼盒套装',
+          eternal_original:'¥889',eternal_activity:'¥900',eternal_slod:'已销售45件' },
+          { eternal_img:require('@/assets/img/body/1076095.jpg_220x240.jpg')
+          ,eternal_best:'热销新品',eternal_my:'T400双C项链女锁骨链镶施华洛世奇锆电镀玫瑰金·双C系列新品，永生花礼盒，玫瑰金',
+          eternal_original:'¥299',eternal_activity:'¥399',eternal_slod:'已销售19件' },
         ]
       }
     }

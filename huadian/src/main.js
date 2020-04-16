@@ -5,6 +5,9 @@ import store from './store'
 //引入vant
 import Vant from 'vant';
 import 'vant/lib/index.css';
+//引入全局组件
+// import header from "@/components/header/tabbar"
+// Vue.component('my-header',header)
 import { 
   Swipe, 
   SwipeItem,
@@ -21,7 +24,9 @@ Vue.use(
     lazyComponent: true
   })
 //引入iconfont图标
-import './assets/font_1749214_y14hec7y2n9/iconfont.css'
+import './assets/font/iconfont.css'
+//引入全局less
+import "./assets/classifiction/classifiction.less"
 Vue.config.productionTip = false
 new Vue({
   router,

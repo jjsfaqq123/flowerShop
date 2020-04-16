@@ -11,6 +11,18 @@
       <headselder></headselder>
       <!-- 主页主体四 -->
       <headseternal></headseternal>
+      <!-- 主页主体五 -->
+      <headcake></headcake>
+      <!-- 主页主体六 -->
+      <headgift></headgift>
+      <!-- 主页主体七 -->
+      <headchocolate></headchocolate>
+      <!-- 主页主体八 -->
+      <fonter></fonter>
+      <!-- scrooll -->
+      <headindicator></headindicator>
+      <!-- 底部 -->
+      <tabbar></tabbar>
     </div>
 </template>
 
@@ -20,6 +32,13 @@ import headHead from "@/view/home/loversHead";
 import headBody from "@/view/home/loversBody";
 import headselder from "@/view/home/loverselder";
 import headseternal from "@/view/home/loverseternal";
+import headcake from "@/view/home/loverscake";
+import headgift from "@/view/home/loversgift";
+import headchocolate from "@/view/home/loverschocolate";
+import headindicator from "@/view/home/loversindicator";
+import fonter from "@/components/fonter/fonter";
+import tabbar from "@/components/header/tabbar";
+
 export default {
   data() {
     return {
@@ -31,11 +50,17 @@ export default {
     headHead,
     headBody,
     headselder,
-    headseternal
+    headseternal,
+    headcake,
+    headgift,
+    headchocolate,
+    fonter,
+    headindicator,
+    tabbar
   }
 }
 </script>
 
-<style>
-
+<style lang='less' scoped>
+ 
 </style>

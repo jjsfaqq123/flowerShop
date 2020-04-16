@@ -1,4 +1,4 @@
-*{padding:0;}
+*{padding:0;margin:0}
 a{text-decoration:none;}
 body{
     width: 100vw;
@@ -13,6 +13,10 @@ body{
     margin: 0 auto;
     font-size: 14px;
     color:#232628
+}
+img {
+    width: 100%;
+    vertical-align: middle;
 }
 @media screen and (min-width: 640px){
 html, body {
