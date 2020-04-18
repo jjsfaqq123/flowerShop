@@ -1,5 +1,5 @@
 <template>
-    <div>
+      <div class="animationLeft">
         <header class="headerbar">
             <div class="headerbar-content">
                 <div class="headerbar-content-left">
@@ -153,7 +153,105 @@
                             </router-link>
                         </div>  
                         </nav>     
-                    </div>   
+                    </div> 
+                      <!--永生花分类  -->
+                  <div class="catebox-details-body" v-if="Active===2">
+                    <div class="catebox-details-title"  >
+                        <h4 class="catebox-details-title-left">分类</h4>
+                    </div>
+                    <nav class="catebox-details-list">
+                        <div class="catebox-details-item" v-for="(eternals,index) in itemBody.eternal_prove" :key="index">
+                            <router-link to="" class="navigation">
+                                <img :src="eternals.imgss" alt="">
+                                <p class="catebox-details-item-desc">{{eternals.list_title}}</p>
+                            </router-link>
+                        </div>  
+                        </nav>     
+                    </div>
+                    <!-- 蛋糕 -->
+                  <div class="catebox-details-body" v-if="Active===3">
+                    <div class="catebox-details-title"  >
+                        <h4 class="catebox-details-title-left">品牌</h4>
+                    </div>
+                    <nav class="catebox-details-list catebox-details-list-square">
+                        <div class="catebox-details-item" v-for="(eternals,index) in itemBody.brosdet" :key="index">
+                            <router-link to="" class="navigation">
+                                <img :src="eternals.imgss" alt="">
+                                <!-- <p class="catebox-details-item-desc">{{eternals.list_title}}</p> -->
+                            </router-link>
+                        </div>  
+                        </nav>     
+                    </div>
+                    <!-- 特色礼品 -->
+                    <div class="catebox-details-body" v-if="Active===4">
+                    <div class="catebox-details-title"  >
+                        <h4 class="catebox-details-title-left">品牌</h4>
+                    </div>
+                    <nav class="catebox-details-list catebox-details-list-square">
+                        <div class="catebox-details-item" v-for="(eternals,index) in itemBody.brand" :key="index">
+                            <router-link to="" class="navigation">
+                                <img :src="eternals.imgss" alt="">
+                                <!-- <p class="catebox-details-item-desc">{{eternals.list_title}}</p> -->
+                            </router-link>
+                        </div>  
+                        </nav>     
+                    </div>
+                   <!-- 特色礼品 对象 -->
+                  <div class="catebox-details-body" v-if="Active===4">
+                    <div class="catebox-details-title"  >
+                        <h4 class="catebox-details-title-left">品牌</h4>
+                    </div>
+                    <nav class="catebox-details-list catebox-details-list-square">
+                        <div class="catebox-details-item  catebox-details-pro" v-for="(eternals,index) in itemBody.features" :key="index">
+                            <router-link to="" class="navigation">
+                                <img :src="eternals.imgss" alt="">
+                                <p class="catebox-details-item-desc">{{eternals.list_title}}</p>
+                            </router-link>
+                        </div>  
+                      </nav>     
+                    </div> 
+                    <!-- 特色礼品 分类 -->
+                  <div class="catebox-details-body" v-if="Active===4">
+                    <div class="catebox-details-title"  >
+                        <h4 class="catebox-details-title-left">分类</h4>
+                    </div>
+                    <nav class="catebox-details-list catebox-details-list-square">
+                        <div class="catebox-details-item  catebox-details-pro" v-for="(eternals,index) in itemBody.commodity" :key="index">
+                            <router-link to="" class="navigation">
+                                <img :src="eternals.imgss" alt="">
+                                <p class="catebox-details-item-desc">{{eternals.list_title}}</p>
+                            </router-link>
+                        </div>  
+                      </nav>     
+                    </div>
+                    <!-- 礼篮 -->
+                  <div class="catebox-details-body" v-if="Active===5">
+                    <div class="catebox-details-title"  >
+                        <h4 class="catebox-details-title-left">礼篮</h4>
+                    </div>
+                    <nav class="catebox-details-list catebox-details-list-square">
+                        <div class="catebox-details-item  catebox-details-pro" v-for="(eternals,index) in itemBody.liLan  " :key="index">
+                            <router-link to="" class="navigation">
+                                <img :src="eternals.imgss" alt="">
+                                <p class="catebox-details-item-desc">{{eternals.list_title}}</p>
+                            </router-link>
+                        </div>  
+                      </nav>     
+                    </div>
+                    <!-- 绿植花卉 -->
+                  <div class="catebox-details-body" v-if="Active===6">
+                    <div class="catebox-details-title"  >
+                        <h4 class="catebox-details-title-left">绿植花卉</h4>
+                    </div>
+                    <nav class="catebox-details-list catebox-details-list-square">
+                        <div class="catebox-details-item  catebox-details-pro" v-for="(eternals,index) in itemBody.greenery  " :key="index">
+                            <router-link to="" class="navigation">
+                                <img :src="eternals.imgss" alt="">
+                                <p class="catebox-details-item-desc">{{eternals.list_title}}</p>
+                            </router-link>
+                        </div>  
+                      </nav>     
+                    </div>
                 </div>  
             </section>
         </section>
@@ -171,11 +269,11 @@ export default {
       list: [
         { left: "热门推荐" },
         { left: "鲜花" },
-        { left: "永生花" }
-        // { left: "蛋糕" },
-        // {left:"特色礼品"},
-        // {left:"礼蓝"},
-        // {left:"绿植花卉"}
+        { left: "永生花" },
+        { left: "蛋糕" },
+        {left:"特色礼品"},
+        {left:"礼蓝"},
+        {left:"绿植花卉"}
       ],
       list1: [
         //   热门推荐
@@ -420,13 +518,205 @@ export default {
               imgss: require("@/assets/img/ification/m_category_ppf_use_Boyfriend.png"),
               list_title: "送男性"
             },
-          ]
-        }
-      ]
-    };
-  },
+            {
+              imgss: require("@/assets/img/ification/m_category_ppf_use_Elder.png"),
+              list_title: "送长辈"
+            },
+            {
+              imgss: require("@/assets/img/ification/m_category_ppf_use_Friend.png"),
+              list_title: "送朋友"
+            },
+          ],
+        eternal_prove:[
+            {
+              imgss:require('@/assets/img/ification/m_category_ppf_sort_Vase.png'),
+              list_title: "永生瓶花"
+            },
+            {
+              imgss:require('@/assets/img/ification/m_category_ppf_sort_Special.png'),
+              list_title: "特色永生花"
+            },
+            {
+              imgss:require('@/assets/img/ification/m_category_ppf_sort_GiantRose.png'),
+              list_title: "巨型玫瑰"
+            },
+          ],
+        },
+        // 蛋糕
+        { imgs: require("@/assets/img/ification/cake.png"),
+        show:false,
+        brosdet:[
+          {
+            imgss:require('@/assets/img/ification/m_category_cake_xfxb.png'),
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_cake_ganso.png'),
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_cake_mcake.png'),
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_cake_lecake.png'),
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_cake_vcaketop.png'),
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_cake_boncake.png'),
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_cake_waffleboy.png'),
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_cake_micamika.png'),
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_cake_21cake.png'),
+          },
+          {
+            imgss:require('@/assets/img/ification/bestcake.png'),
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_cake_cheesecake.png'),
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_cake_cakeboss.png'),
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_cake_pantry.png'),
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_cake_all.png'),
+          },
+        ]
+      },
+      // 特色礼品
+      { imgs: require("@/assets/img/ification/gift.png"),
+        show:false,
+        brand: [
+          {
+            imgss:require('@/assets/img/ification/m_category_gift_brand_All.png'),
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_gift_brand_SWAROVSKI.png'),
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_gift_brand_GlamEver.png'),
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_gift_brand_Dior.png'),
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_gift_brand_MW.png'),
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_gift_brand_HelloKitty.png'),
+          },
+        ],
+        // 特色礼品 对象
+        features: [
+          {
+            imgss:require('@/assets/img/ification/m_category_gift_use_Girlfriend.png'),
+            list_title: "送女友"
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_gift_use_Boyfriend.png'),
+            list_title: "送男友"
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_gift_use_Friend.png'),
+            list_title: "送朋友"
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_gift_use_Customer.png'),
+            list_title: "送客户"
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_gift_use_Teacher.png'),
+            list_title: "送老师"
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_gift_use_Child.png'),
+            list_title: "送小孩"
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_gift_use_Leader.png'),
+            list_title: "送领导"
+          },
+        ],
+        // 特色商品  分类
+        commodity: [
+          {
+            imgss:require('@/assets/img/ification/m_category_gift_sort_Musicbox.png'),
+            list_title: "音乐盒"
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_gift_sort_Goldfoilflower.png'),
+            list_title: "金箔花"
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_gift_sort_3DCrystal.png'),
+            list_title: "3D水晶内雕"
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_gift_sort_JewelryBeauty.png'),
+            list_title: "首饰/美妆"
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_gift_sort_Chocolates.png'),
+            list_title: "巧克力"
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_gift_sort_dolls.png'),
+            list_title: "公仔/睡枕"
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_gift_sort_HomeLife.png'),
+            list_title: "家具生活"
+          },
+          {
+            imgss:require('@/assets/img/ification/m_category_gift_sort_OrnamentsOthers.png'),
+            list_title: "摆件/其他"
+          },
+        ]
+      },
+      // 礼篮
+      { imgs: require("@/assets/img/ification/hamper.png"),
+        show:false,
+        liLan: [
+          {
+            imgss:require('@/assets/img/ification/m_category_Hamper.png'),
+            list_title: "礼篮"
+          },
+        ]
+      },
+      // 绿植花卉
+      { imgs: require("@/assets/img/ification/plants.png"),
+        show:false,
+        greenery: [
+          {
+            imgss: require("@/assets/img/ification/m_category_flowers_use_All.png"),
+            list_title: "全部"
+          },
+          {
+            imgss: require("@/assets/img/ification/m_category_Plants_Green.png"),
+            list_title: "绿色植物"
+          },
+          {
+            imgss: require("@/assets/img/ification/m_category_Plants_Potted.png"),
+            list_title: "盆栽花卉"
+          },
+          {
+            imgss: require("@/assets/img/ification/m_category_Plants_Succulent.png"),
+            list_title: "多肉盆栽"
+          },
+        ]
+      }
+    ]
+  };
+},
   components: {
-    tabbar
+    tabbar,
     // eternal
   },
   created() {},

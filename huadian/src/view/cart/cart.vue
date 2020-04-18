@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div class="animationLeft">
         <header class="headerbar">
             <div class="headerbar-left">
                 <a href="" class="navigation">
-                    <img src="../../public/img/1.png" alt="" class="imgs">
+                    <img src="@/assets/img/cart/1.png" alt="" class="imgs">
                 </a>
             </div>
             <div class="headerbar-center">
@@ -11,9 +11,14 @@
             </div>
         </header>
         <section class="main">
+            <div class="login">
+                <span class="login-tips">登录后将同步您的购物车商品</span>
+                <router-link to="" class="login-btn">登录</router-link>
+            </div>
             <div class="emptycart">
-                <img src="../../public/img/11.png"  class="img">
-                <p class="text">这里什么都没有呀...</p>
+                <img src="@/assets/img/cart/m_shopping_empty_cart.png"  class="img">
+                <p class="text">购物车内暂时没有商品.</p>
+                <router-link to='/' class="home">去逛逛</router-link>
             </div>
             <div class="guess">
                 <div class="guess-title">猜你喜欢</div>
@@ -37,6 +42,7 @@
                 </div>
             </div>
         </section>
+        <tabbar></tabbar>
     </div>
 </template>
 <script>
@@ -44,18 +50,18 @@ export default {
     data(){
         return{
             list:[
-                {imgs:require("../../public/img/2.jpg"),
-                title:"一往情深.精品玫瑰礼盒:19枝红玫瑰，勿忘我0.1扎",price:"¥239"},
-                 {imgs:require("../../public/img/3.jpg"),
-                title:"一往情深.精品玫瑰礼盒:19枝红玫瑰，勿忘我0.1扎",price:"¥368"},
-                 {imgs:require("../../public/img/4.jpg"),
-                title:"一往情深.精品玫瑰礼盒:19枝红玫瑰，勿忘我0.1扎",price:"¥139"},
-                 {imgs:require("../../public/img/5.jpg"),
-                title:"一往情深.精品玫瑰礼盒:19枝红玫瑰，勿忘我0.1扎",price:"￥539"},
-                 {imgs:require("../../public/img/6.jpg"),
-                title:"一往情深.精品玫瑰礼盒:19枝红玫瑰，勿忘我0.1扎",price:"¥138"},
-                 {imgs:require("../../public/img/7.jpg"),
-                title:"一往情深.精品玫瑰礼盒:19枝红玫瑰，勿忘我0.1扎",price:"¥202"},
+                {imgs:require("@/assets/img/cart/9010966.jpg"),
+                title:"一往情深.精品玫瑰礼盒:19枝红玫瑰，勿忘我0.1扎",price:"¥249"},
+                 {imgs:require("@/assets/img/cart/9010011.jpg"),
+                title:"一心一意.玫瑰11枝，粉色勿忘我0.3扎",price:"¥139"},
+                 {imgs:require("@/assets/img/cart/9012177.jpg"),
+                title:"不变的承诺.99枝红玫瑰",price:"¥520"},
+                 {imgs:require("@/assets/img/cart/9012009.jpg"),
+                title:"忘情巴黎.33枝红玫瑰",price:"￥298"},
+                 {imgs:require("@/assets/img/cart/9012450.jpg"),
+                title:"韩式系列/初心不负. 韩式花束系列花艺师全新打造，卡罗拉玫瑰11枝、白底粉边洋桔梗5枝、大叶尤加利10枝",price:"¥229"},
+                 {imgs:require("@/assets/img/cart/9012441.jpg"),
+                title:" 语笑嫣然.粉佳人玫瑰9枝、粉色小菊、洋桔梗、大叶尤加利",price:"¥198"},
             ],
         }
     },
@@ -66,7 +72,7 @@ export default {
     }
 }
 </script>
-<style scoped>
+<style lang="less" scoped>
     .headerbar {
         display: flex;
         height: 3.14285714rem;
@@ -111,7 +117,7 @@ export default {
         text-align: center;
     }
     section.main .emptycart img.img{
-        width: 7.14285714rem;
+        width: 9.14285714rem;
         height: 7.14285714rem;
     }
     img {
@@ -174,5 +180,48 @@ export default {
         font-size: 0.85714286rem;
         line-height: 2.57142857rem;
         color: #71797F
+   }
+   section.main .login {
+        height: 2.85714286rem;
+        line-height: 2.85714286rem;
+        text-align: center;
+        background: #fff0ec;
+        border: 0.07142857rem solid rgba(255, 115, 76, 0.2);
+   }
+   .login {
+       .login-tips {
+           font-size: 0.92857143rem;
+        }
+        .login-btn {
+            display: inline-block;
+            margin-left: 1.14285714rem;
+            width: 4.57142857rem;
+            height: 1.71428571rem;
+            line-height: 1.71428571rem;
+            text-align: center;
+            border-radius: 1.92857143rem;
+            border: 0.07142857rem solid #ff734c;
+            color: #FF734C;
+            font-size: 0.92857143rem;
+        }
+   }
+   .emptycart {
+       .home {
+            display: inline-block;
+            margin-top: 1rem;
+            width: 8.28571429rem;
+            height: 2rem;
+            line-height: 2rem;
+            background: #ff734c;
+            border-radius: 1.92857143rem;
+            color: #ffffff;
+            font-size: 1.07142857rem;
+            font-weight: 600;
+       }
+   }
+   .guess-list::after {
+       display: block;
+       content:"";
+       clear: both;
    }
 </style>

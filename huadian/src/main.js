@@ -6,8 +6,8 @@ import store from './store'
 import Vant from 'vant';
 import 'vant/lib/index.css';
 //引入全局组件
-// import header from "@/components/header/tabbar"
-// Vue.component('my-header',header)
+import tabbar from "@/components/header/tabbar"
+Vue.component('tabbar',tabbar)
 import { 
   Swipe, 
   SwipeItem,
@@ -18,8 +18,8 @@ Vue.use(
   Vant,
   Swipe,
   SwipeItem,
-  
   )
+  //图片懒加载
   Vue.use(Lazyload,{
     lazyComponent: true
   })

@@ -6,6 +6,48 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1282982",
+      "name": "QQ",
+      "font_class": "qq",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "3016410",
+      "name": "支付宝",
+      "font_class": "zhifubao",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "6772173",
+      "name": "邮箱",
+      "font_class": "youxiang",
+      "unicode": "ec31",
+      "unicode_decimal": 60465
+    },
+    {
+      "icon_id": "8777370",
+      "name": "list",
+      "font_class": "icon-test1",
+      "unicode": "e64f",
+      "unicode_decimal": 58959
+    },
+    {
+      "icon_id": "600578",
+      "name": "left",
+      "font_class": "left",
+      "unicode": "e641",
+      "unicode_decimal": 58945
+    },
+    {
+      "icon_id": "2878288",
+      "name": "htb－Arrow right02",
+      "font_class": "left1",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
       "icon_id": "1158207",
       "name": "收货地址",
       "font_class": "shouhuodizhi",

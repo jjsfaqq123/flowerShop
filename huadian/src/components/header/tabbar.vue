@@ -18,14 +18,13 @@ export default {
       tabbar: [
         {tabbar_url:'/',tabbar_icon:"iconfont icon-shouye",tabbar_title:'首页', },
         {tabbar_url:'/classification',tabbar_icon:'iconfont icon-fenlei',tabbar_title:'分类'},
-        {tabbar_url:'/fmak',tabbar_icon:'iconfont icon-gouwuche',tabbar_title:'购物车'},
-        {tabbar_url:'/fmak',tabbar_icon:'iconfont icon-weixiao',tabbar_title:'我的'},
+        {tabbar_url:'/cart',tabbar_icon:'iconfont icon-gouwuche',tabbar_title:'购物车'},
+        {tabbar_url:'/mine',tabbar_icon:'iconfont icon-weixiao',tabbar_title:'我的'},
       ]
     }
   },
   methods:{
     switchs(index) {
-       console.log(index)
        this.Active=index;
     }
   }
