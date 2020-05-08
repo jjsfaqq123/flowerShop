@@ -14,7 +14,7 @@
           <i class="iconfont icon-icon-test1" @click="iconFenlei" ></i>
           <nav class="headerbar-menu" :class="{'actives':Actives}">
             <div class="headerbar-menu-item" v-for="(ifcations,index) in ifcation" :key='index'>
-              <router-link :to="ifcations.path" class="navigation">
+              <router-link :to="ifcations.path" class="navigation" :class="{active:guideIndex==index}" @click.native="setGuidIndex(index)" >
                 <i :class="ifcations.ifcation_icon"></i>
                 <span>{{ifcations.ifcation_text}}</span>
               </router-link>
@@ -26,6 +26,7 @@
   </div>
 </template>
 <script>
+import { mapState, mapMutations } from 'vuex';
 export default {
   data() {
     return {
@@ -38,7 +39,11 @@ export default {
       ]
     }
   },
+  computed: {
+    ...mapState(["guideIndex"])
+  },
   methods: {
+    ...mapMutations(["setGuidIndex"]),
     iconFenlei() {
      if(!this.Actives) {
        this.Actives='active'
@@ -64,6 +69,9 @@ export default {
 </script>
 <style lang="less" scoped>
   .headerbar {
+    position: relative;
+    z-index:1;
+    left: 0;
     display: flex;
     height: 3.14285714rem;
     line-height: 3.14285714rem;

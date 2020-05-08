@@ -30,6 +30,7 @@ export default {
     overflow: hidden;
     justify-content: center;
     color: #fff;
+    width:100%;
     .headerbar-left,.headerbar-right {
       width: 3.42857143rem;
       height: 3.42857143rem;

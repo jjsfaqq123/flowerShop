@@ -3,8 +3,10 @@
     <section class="swiper-container">
       <van-swipe :autoplay="3000">
         <van-swipe-item v-for="(image, index) in images" :key="index">
-          <img v-lazy="image.imgs" class="swipet" />
-          <img error="@/assets/img/body/1.jpg" alt />
+          <router-link :to="image.path_img">
+            <van-image lazy-load :src="'http://127.0.0.1:5000'+image.imgs" :show-loading="true" class="swipet" />
+            <van-image onerror='@/assets/img/body/18_byz_m.jpg' alt='加载失败' />
+          </router-link>
         </van-swipe-item>
       </van-swipe>
     </section>
@@ -27,9 +29,9 @@
       </div>
     </div>
     <nav class="procate">
-      <div class="procate-item" v-for="(item,index) in procat" :key="index">
+      <div class="procate-item" v-for="(item,index) in proca" :key="index">
         <router-link to="javascript:;" class="navigation">
-          <img :src="item.procat_img" alt="">
+          <img :src="'http://127.0.0.1:5000/'+item.procat_img" alt="">
         </router-link>
         <p>{{item.procat_title}}</p>
       </div>
@@ -42,7 +44,7 @@
       <div class="scene-list">
         <div class="scene-item scene-item-radius" v-for="(scent , index) in scenc" :key="index">
           <router-link to="javasript:;" class="navigation">
-            <img :src="scent.scenc_img" alt="送恋人">
+            <img :src="'http://127.0.0.1:5000/'+scent.scenc_img" alt="送恋人">
           </router-link>
           <span class="scene-item-use-title">{{scent.scenc_title}}</span>
         </div>
@@ -50,7 +52,7 @@
       <div class="scene-list">
         <div class="scene-item scene-item-radius" v-for="(lover ,index) in lovers" :key="index">
           <router-link to="javasript:;" class="navigation">
-            <img :src="lover.lovers_img" alt="送恋人">
+            <img :src="'http://127.0.0.1:5000/'+lover.lovers_img" alt="送恋人">
           </router-link>
           <span class="scene-item-title">{{lover.lovers_title}}</span>
         </div>
@@ -80,7 +82,7 @@
       <div class="scene-list">
         <div class="scene-item" v-for="(freshs ,index) in fresh" :key="index">
           <router-link to="" class="navigation" >
-            <img :src="freshs.fresh_img" :alt="freshs.fresh_title">
+            <img :src="'http://127.0.0.1:5000/'+freshs.fresh_img" :alt="freshs.fresh_title">
             <span class="scene-item-pange">{{freshs.fresh_title}}</span>
           </router-link>
         </div>
@@ -88,52 +90,51 @@
     </section>
   </div>
 </template>
-
 <script>
-
+// import { homeUser } from "@/service/api";
 export default {
   data() {
     return {
       images: [
-        { imgs: require("@/assets/img/body/18_byz_m.jpg") },
-        { imgs: require("@/assets/img/body/18_youflower_m.jpg") },
-        { imgs: require("@/assets/img/body/19_birthday_banner_m.jpg") }
+        { imgs: require("@/assets/img/body/20_mothersday_m.jpg"),path:'/motherDay' },
+        { imgs: require("@/assets/img/body/19_birthday_banner_m.jpg"),path:'/motherDay' },
+        { imgs: require("@/assets/img/body/18_byz_m.jpg"),path:'/motherDay' },
+        { imgs: require("@/assets/img/body/18_youflower_m.jpg"),path:'/motherDay' }
       ],
-      procat: [
-         {procat_img:require('@/assets/img/body/m_home_category_flower.png') , procat_title:'鲜花' },
-         {procat_img:require('@/assets/img/body/m_home_category_ppf.png') , procat_title:'永生花' },
-         {procat_img:require('@/assets/img/body/m_home_category_cake.png') , procat_title:'蛋糕' },
-         {procat_img:require('@/assets/img/body/m_home_category_gift.png') , procat_title:'礼品' },
-         {procat_img:require('@/assets/img/body/m_home_category_chocolate.png') , procat_title:'巧克力' },
-      ],
-      scenc: [
-        {scenc_img:require('@/assets/img/body/m_home_use_lover.png') , scenc_title:'送恋人'},
-        {scenc_img:require('@/assets/img/body/m_home_use_elder.png') , scenc_title:'送长辈'},
-        {scenc_img:require('@/assets/img/body/m_home_use_friends.png') , scenc_title:'送朋友'},
-      ],
-      lovers: [
-        {lovers_img:require('@/assets/img/body/m_home_use.png') , lovers_title:"生日祝福"},
-        {lovers_img:require('@/assets/img/body/m_home.png') , lovers_title:"表白求婚"},
-        {lovers_img:require('@/assets/img/body/m_home_use_business2.png') , lovers_title:"开业商务"},
-        {lovers_img:require('@/assets/img/body/m_home_use_anniversary2.png') , lovers_title:"周年纪念"},
-      ],
-      fresh: [
-        {fresh_img:require('@/assets/img/body/m_home_category_new2.png'),fresh_title:'新品来袭'},
-        {fresh_img:require('@/assets/img/body/m_home_category_quality2.png'),fresh_title:'品味之选'},
-        {fresh_img:require('@/assets/img/body/m_home_category_you2.png'),fresh_title:'设计师臻选'}
-      ]
+      images:null,
+      proca:null,
+      scenc:null,
+      lovers:null,
+      fresh:null,
     };
   },
-  created() {},
- 
+  created() {
+    this.procatBarthday()
+  },
+  methods: {
+      async procatBarthday() {
+      let url = "homebarthday"
+      this.axios.get(url).then((res)=> {
+        console.log(res.data)
+        //判断返回数据是否返回
+        if(res.data.code === 1) {
+          this.proca = res.data.barthday[0];
+          this.scenc = res.data.barthday[1];
+          this.lovers = res.data.barthday[2];
+          this.fresh = res.data.barthday[3];
+          this.images = res.data.barthday[4];
+        }
+      })
+    }
+  }
 };
 </script>
 
 <style lang="less" scoped>
-/deep/ .van-swipe {
+ .van-swipe {
   height: 200px;
 }
-/deep/.van-swipe__indicator--active {
+.van-swipe__indicator--active {
   background: #ff734c;
   width: 2.28571429rem;
   border-radius: 03rem;

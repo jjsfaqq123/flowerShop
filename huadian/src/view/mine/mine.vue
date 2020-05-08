@@ -1,7 +1,8 @@
 <template>
-  <div style="background: #E9ECF0;height: 700px;" class="animationLeft">
+  <div style="background: #E9ECF0;height: 700px;" class="">
     <headBox title='个人中心' to='/' ></headBox>
-      <section class="main  ssw">
+    <m-scroll>
+      <section class="main  ssw animationLeft">
         <div class="userinformation">
           <div class="userinformation-notlogin">
             <p class="userinformation-notlogin-hi">Hi,欢迎来到花礼网</p>
@@ -66,6 +67,7 @@
           </div>
         </div>
       </section>
+      </m-scroll>
     <tabbar></tabbar>
   </div>
 </template>

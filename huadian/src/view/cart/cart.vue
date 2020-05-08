@@ -1,5 +1,5 @@
 <template>
-    <div class="animationLeft">
+    <div class="">
         <header class="headerbar">
             <div class="headerbar-left">
                 <a href="" class="navigation">
@@ -10,7 +10,8 @@
                 <p class="headerbar-content">购物车</p>
             </div>
         </header>
-        <section class="main">
+        <m-scroll>
+        <section class="main animationLeft">
             <div class="login">
                 <span class="login-tips">登录后将同步您的购物车商品</span>
                 <router-link to="" class="login-btn">登录</router-link>
@@ -42,10 +43,12 @@
                 </div>
             </div>
         </section>
+        </m-scroll>
         <tabbar></tabbar>
     </div>
 </template>
 <script>
+import { mapState } from "vuex"
 export default {
     data(){
         return{
@@ -68,8 +71,9 @@ export default {
     methods:{
         btn(){
             this.$router.push("/detail")
-        }
-    }
+        },
+        
+    },
 }
 </script>
 <style lang="less" scoped>

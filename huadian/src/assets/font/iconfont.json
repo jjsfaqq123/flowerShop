@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "451750",
+      "name": "眼睛 闭眼 闭着眼睛",
+      "font_class": "yey2-copy",
+      "unicode": "e703",
+      "unicode_decimal": 59139
+    },
+    {
+      "icon_id": "3767381",
+      "name": "睁眼",
+      "font_class": "zhengyan",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "12672291",
+      "name": "删  除",
+      "font_class": "shanchu",
+      "unicode": "e6d8",
+      "unicode_decimal": 59096
+    },
+    {
       "icon_id": "1282982",
       "name": "QQ",
       "font_class": "qq",

@@ -1,6 +1,6 @@
 <template>
-      <div class="animationLeft">
-        <header class="headerbar">
+      <div class="">
+        <header class="headerbar ">
             <div class="headerbar-content">
                 <div class="headerbar-content-left">
                     <i class="iconfont icon-sousuo" style='color: #B0B3B6;'></i>
@@ -10,7 +10,8 @@
                 </div>
             </div>
         </header>
-        <section class="catebox">
+        <m-scroll>
+        <section class="catebox animationLeft">
             <aside class="catebox-menu">
                 <div class="catebox-menu-item" v-for="(item,index) in list" :key="index" :class="Active == index?'active':''">
                     <router-link to="" @click.native="flowe(index)">{{item.left}}</router-link>
@@ -255,6 +256,7 @@
                 </div>  
             </section>
         </section>
+        </m-scroll>
         <tabbar/>
     </div>
 </template>
@@ -722,7 +724,6 @@ export default {
   created() {},
   methods: {
     flowe(index) {
-      console.log(index);
       this.Active = index;
       var list = this.list;
       for (var i = 0; i < list.length; i++) {
@@ -736,7 +737,7 @@ export default {
 
 <style lang="less" scoped>
 .headerbar {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -746,6 +747,7 @@ export default {
   background: #fff;
   overflow: hidden;
   border-bottom: 2px solid #f1f3f6;
+  z-index:1;
 }
 .headerbar-content {
   display: flex;

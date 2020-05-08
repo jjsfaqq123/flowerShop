@@ -2,7 +2,7 @@
   <div>
     <div class="scroll" @click="scrollClick">
       <div class="scroll-item">
-        <a href="#" class="iconfont icon-xiangshangjiantou-copy " id="backTop"></a>
+        <router-link to="#" class="iconfont icon-xiangshangjiantou-copy" id="backTop"></router-link>
       </div>
     </div>
   </div>
@@ -14,10 +14,12 @@ export default {
 
       }
     },
-    created() {
+    mounted() {
       window.onscroll=function() {
+        console.log(2)
         //获得目前滚动的距离
         var scrollTop =document.documentElement.scrollTop||document.body.scrollTop;
+        // console.log(scrollTop)
         //找到要显示试图
         var scroll = document.querySelector('.scroll');
         if(scrollTop>770) {
@@ -35,27 +37,11 @@ export default {
            if(top<=0) {
              clearInterval(timeTop)
            }
-         },10)
+      },10)
     }
   }
 }
 </script>
 <style lang="less" scoped>
-  .scroll {
-    position: fixed;
-    display: none;
-    right: 30px;
-    top: 595px;
-    .scroll-item {
-      display: block;
-      width: 2.57142857rem;
-      height: 2.57142857rem;
-      line-height: 2.57142857rem;
-      text-align: center;
-      border-radius: 50%;
-      background: #fff;
-      box-shadow: 0 0.28571429rem 0.42857143rem 0 #dee2e5;
-      cursor: pointer;
-    }
-  }
+  
 </style>

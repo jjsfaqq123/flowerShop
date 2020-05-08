@@ -1,33 +1,39 @@
 <template>
-  <div>
     <nav class="tabbar">
-      <div class="tabbar-item" v-for="(tabbars,index) in tabbar" :key="index">
-        <router-link :to='tabbars.tabbar_url' class="navigation" @click.native="switchs(index)" :class="Active==index?'active':''">
+      <div class="tabbar-item" >
+        <router-link  
+        v-for="(tabbars,index) in tabbar" :key="index"
+        :to='tabbars.tabbar_url' 
+        :class="{active:guideIndex==index}"
+        @click.native="setGuidIndex(index)"
+        class="navigation" >
           <i :class="tabbars.tabbar_icon"></i>
           <p>{{tabbars.tabbar_title}}</p>
         </router-link>
       </div>
     </nav>
-  </div>
+ 
 </template>
 <script>
+import {mapMutations, mapState} from "vuex"
+// import { watch, constants } from 'fs';
 export default {
   data() {
     return {
-      Active:0,
       tabbar: [
         {tabbar_url:'/',tabbar_icon:"iconfont icon-shouye",tabbar_title:'首页', },
         {tabbar_url:'/classification',tabbar_icon:'iconfont icon-fenlei',tabbar_title:'分类'},
         {tabbar_url:'/cart',tabbar_icon:'iconfont icon-gouwuche',tabbar_title:'购物车'},
         {tabbar_url:'/mine',tabbar_icon:'iconfont icon-weixiao',tabbar_title:'我的'},
-      ]
+      ],
     }
   },
+  computed: {
+    ...mapState(['guideIndex'])
+  },
   methods:{
-    switchs(index) {
-       this.Active=index;
-    }
-  }
+    ...mapMutations(["setGuidIndex"]),
+  },
 }
 </script>
 <style lang="less" scoped>
@@ -37,24 +43,22 @@ export default {
     right: 0;
     bottom: 0;
     z-index: 9;
-    display: flex;
     align-items: center;
     overflow: hidden;
     background: #F7F9FA;
-    max-width: 640px;
+    width:100%;
 }
-.active {
- color: #FF734C;
-}
+
 .tabbar-item {
   height: 3.5rem;
-  flex: 1;
   text-align: center;
+  display: flex;
   .navigation {
     height: 3.5rem;
-    padding-top: 0.28571429rem;
+    padding-top: 0.88571429rem;
     box-sizing: border-box;
     display: block;
+    flex: 1;
   }
 }
 </style>
