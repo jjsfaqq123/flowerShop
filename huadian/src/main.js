@@ -15,7 +15,6 @@ import {
   Swipe, 
   SwipeItem,
   Lazyload
-
 } from 'vant';
 Vue.use(
   Vant,

@@ -3,23 +3,23 @@
       <section class="product">
         <h3 class="product-title">礼品推荐</h3>
         <div class="product-list product-list-vertical">
-          <div class="product-item product-item-vertical" v-for="(eternals,index) in  eternal" :key="index">
+          <div class="product-item product-item-vertical" v-for="(gifts,index) in  gift" :key="index">
             <router-link to="" class="navigation">
               <div class="product-item-pic">
-                <img :src="eternals.eternal_img" alt="">
+                <img :src="'http://127.0.0.1:5000/'+gifts.gift_img" alt="">
               </div>
               <div class="product-item-info">
                 <div class="product-item-info-tags">
-                  <span>{{eternals.eternal_best}}</span>
+                  <span>{{gifts.gift_best}}</span>
                 </div>
-                <div class="product-item-info-name  text-overflow ">{{eternals.eternal_my}}</div>
+                <div class="product-item-info-name  text-overflow ">{{gifts.gift_my}}</div>
                 <div class="product-item-info-bottom">
                   <div class="product-item-info-bottom-left">
                     <p class="product-item-info-prices">
-                      <strong>{{eternals.eternal_original}}</strong>
-                      <s>{{eternals.eternal_activity}}</s>
+                      <strong>{{gifts.gift_original}}</strong>
+                      <s>{{gifts.gift_activity}}</s>
                     </p>
-                    <p class="product-item-info-sales">{{eternal.eternal_slod}}</p>
+                    <p class="product-item-info-sales">{{gifts.gift_slod}}</p>
                   </div>
                   <div class="product-item-info-bottom-right">
                     <i class="iconfont icon-gouwuche"></i>
@@ -39,20 +39,18 @@
 export default {
     data() {
       return {
-        eternal: [
-          { eternal_img:require('@/assets/img/body/1070017.jpg_220x240.jpg')
-          ,eternal_best:'礼盒装畅销款',eternal_my:'天使之恋·高档精品化妆镜,天然深海母贝，彩白色的奥地利水钻',
-          eternal_original:'¥159',eternal_activity:'¥199',eternal_slod:'已销售1.8万件' },
-          { eternal_img:require('@/assets/img/body/1076062.jpg_220x240.jpg')
-          ,eternal_best:'火热畅销款',eternal_my:'星期耳钉礼盒·s925银个性耳钉',
-          eternal_original:'¥198',eternal_activity:'¥298',eternal_slod:'已销售1574件' },
-          { eternal_img:require('@/assets/img/body/1076049.jpg_220x240.jpg')
-          ,eternal_best:'新品',eternal_my:'迪奥口红#999+迪奥花漾淡香水30ml·口红+香水礼盒套装',
-          eternal_original:'¥889',eternal_activity:'¥900',eternal_slod:'已销售45件' },
-          { eternal_img:require('@/assets/img/body/1076095.jpg_220x240.jpg')
-          ,eternal_best:'热销新品',eternal_my:'T400双C项链女锁骨链镶施华洛世奇锆电镀玫瑰金·双C系列新品，永生花礼盒，玫瑰金',
-          eternal_original:'¥299',eternal_activity:'¥399',eternal_slod:'已销售19件' },
-        ]
+        gift:null,
+      }
+    },
+    created() {
+      this.getGift()
+    },
+    methods: {
+      getGift() {
+        let url = 'api/home/gift';
+        this.axios.get(url).then(res => {
+          this.gift = res.data.homeGift
+        })
       }
     }
 }

@@ -58,22 +58,16 @@
         </div>
       </div>
       <div class="scene-list">
-        <router-link to="javscript:;" class="scene-item scene-item-bg" >
-          <p class="scene-item-name">热销榜</p>
-          <p class="scene-item-desc">集万千宠爱</p>
+        <router-link to="" class="scene-item scene-item-bg  " v-for="(hs,index) in fonts" :key="index">
+          <img :src="'http://127.0.0.1:5000/'+hs.font_img" alt="" class="scenc-img">
+          <p class="scene-item-name">{{hs.font_title}}</p>
+          <p class="scene-item-desc">{{hs.font_subtitle}}</p>
           <div class="scene-item-bottom">
-            <span class="scene-item-bottom-label">大家都在买</span>
-            <span class="scene-item-bottom-text">热销11.7万束</span>
-          </div>
-        </router-link>
-        <router-link to="" class="scene-item scene-item-bg  scenc-img">
-          <p class="scene-item-name">特价专区</p>
-          <p class="scene-item-desc">超值好货</p>
-          <div class="scene-item-bottom">
-            <span class="scene-item-bottom-label">限时直降</span>
+            <span class="scene-item-bottom-label">{{hs.font_mytitle}}</span>
+            <span class="scene-item-bottom-text">{{hs.font_sell}}</span>
             <span class="scene-item-bottom-text">
-              ￥158
-              <s>￥186</s>
+              {{hs.font_price}}
+              <s>{{hs.font_netprice}}</s>
               </span>
           </div>
         </router-link>
@@ -95,27 +89,21 @@
 export default {
   data() {
     return {
-      images: [
-        { imgs: require("@/assets/img/body/20_mothersday_m.jpg"),path:'/motherDay' },
-        { imgs: require("@/assets/img/body/19_birthday_banner_m.jpg"),path:'/motherDay' },
-        { imgs: require("@/assets/img/body/18_byz_m.jpg"),path:'/motherDay' },
-        { imgs: require("@/assets/img/body/18_youflower_m.jpg"),path:'/motherDay' }
-      ],
       images:null,
       proca:null,
       scenc:null,
       lovers:null,
       fresh:null,
+      fonts:null,
     };
   },
   created() {
     this.procatBarthday()
   },
   methods: {
-      async procatBarthday() {
-      let url = "homebarthday"
+      procatBarthday() {
+      let url = "api/home/barthday"
       this.axios.get(url).then((res)=> {
-        console.log(res.data)
         //判断返回数据是否返回
         if(res.data.code === 1) {
           this.proca = res.data.barthday[0];
@@ -123,6 +111,7 @@ export default {
           this.lovers = res.data.barthday[2];
           this.fresh = res.data.barthday[3];
           this.images = res.data.barthday[4];
+          this.fonts = res.data.barthday[5]
         }
       })
     }
@@ -191,6 +180,9 @@ export default {
       }
     }
 }
+.scenc-img {
+  position: relative;
+}
 .navigation{
   display: block;
 }
@@ -240,6 +232,16 @@ export default {
       position: relative;
       margin: 0 0.14285714rem;
       overflow: hidden;
+      .scene-item-name {
+        position: absolute;
+        top:0.4rem;
+        left: 0.1rem;
+      }
+      .scene-item-desc {
+        position: absolute;
+        top:2rem;
+        left: 0.1rem;
+      }
     }
   .scene-item-title {
     position: absolute;
@@ -268,7 +270,6 @@ export default {
     background-position: center center;
     padding: 0.85714286rem;
     border: 1px solid #E9ECF0;
-    background-image: url('../../assets/img/body/m_home_ranklist2.png');
 }
 .scene-item-desc {
     font-size: 0.78571429rem;
@@ -295,9 +296,9 @@ export default {
     color: #fff;
     margin-right: 2.14285714rem;
 }
-.scenc-img{
-  background-image:url('../../assets/img/body/m_home_special2.png') !important;
-}
+// .scenc-img{
+//   background-image:url('') !important;
+// }
 .scene-item-pange {
     position: absolute;
     bottom: 0;

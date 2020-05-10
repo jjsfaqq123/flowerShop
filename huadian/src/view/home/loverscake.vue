@@ -3,23 +3,23 @@
       <section class="product">
         <h3 class="product-title">蛋糕推荐</h3>
         <div class="product-list product-list-vertical">
-          <div class="product-item product-item-vertical" v-for="(eternals,index) in  eternal" :key="index">
+          <div class="product-item product-item-vertical" v-for="(cakes,index) in  cake" :key="index">
             <router-link to="" class="navigation">
               <div class="product-item-pic">
-                <img :src="eternals.eternal_img" alt="">
+                <img :src="'http://127.0.0.1:5000/'+cakes.cake_img" alt="">
               </div>
               <div class="product-item-info">
                 <!-- <div class="product-item-info-tags">
                   <span>{{eternals.eternal_best}}</span>
                 </div> -->
-                <div class="product-item-info-name  text-overflow ">{{eternals.eternal_my}}</div>
+                <div class="product-item-info-name  text-overflow ">{{cakes.cake_my}}</div>
                 <div class="product-item-info-bottom">
                   <div class="product-item-info-bottom-left">
                     <p class="product-item-info-prices">
-                      <strong>{{eternals.eternal_original}}</strong>
-                      <s>{{eternals.eternal_activity}}</s>
+                      <strong>{{cakes.cake_original}}</strong>
+                      <s>{{cakes.cake_activity}}</s>
                     </p>
-                    <p class="product-item-info-sales">{{eternal.eternal_slod}}</p>
+                    <p class="product-item-info-sales">{{cakes.cake_slod}}</p>
                   </div>
                   <div class="product-item-info-bottom-right">
                     <i class="iconfont icon-gouwuche"></i>
@@ -36,23 +36,25 @@
     </div>
 </template>
 <script>
+import { homeUser } from "@/service/api"
 export default {
     data() {
       return {
-        eternal: [
-          { eternal_img:require('@/assets/img/body/5181052.jpg_220x240.jpg')
-          ,eternal_best:'畅销',eternal_my:'蓝色星球（6寸）·',
-          eternal_original:'¥298',eternal_activity:'¥398',eternal_slod:'已销售120件' },
-          { eternal_img:require('@/assets/img/body/5231015.jpg_220x240.jpg')
-          ,eternal_best:'创意新品',eternal_my:'蒙布朗栗蓉奶油蛋糕（6寸）·奶油蛋糕',
-          eternal_original:'¥249',eternal_activity:'¥349',eternal_slod:'已销售5件' },
-          { eternal_img:require('@/assets/img/body/5302008.jpg_220x240.jpg')
-          ,eternal_best:'热销单品',eternal_my:'蝶恋花景(8寸)·元祖鲜奶蛋糕，布丁加水果夹层',
-          eternal_original:'¥258',eternal_activity:'¥358',eternal_slod:'已销售2558件' },
-          { eternal_img:require('@/assets/img/body/5013046.jpg_220x240.jpg')
-          ,eternal_best:'爱的承诺',eternal_my:'水果盛宴·3磅(10寸)水果蛋糕',
-          eternal_original:'¥239',eternal_activity:'¥239',eternal_slod:'已销售2955件' },
-        ]
+        cake:null,
+      }
+    },
+    created() {
+      this.getCake()
+    },
+    methods: {
+      async getCake() {
+        let res = await homeUser();
+        //判断返回值是否为1
+        if(res.data.code === 1) {
+          this.cake = res.data.homeCake;
+        }else {
+          this.cake = "";
+        }
       }
     }
 }

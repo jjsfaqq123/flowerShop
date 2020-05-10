@@ -3,23 +3,23 @@
       <section class="product">
         <h3 class="product-title">巧克力推荐</h3>
         <div class="product-list product-list-vertical">
-          <div class="product-item product-item-vertical" v-for="(eternals,index) in  eternal" :key="index">
+          <div class="product-item product-item-vertical" v-for="(chocolates,index) in  chocolate" :key="index">
             <router-link to="" class="navigation">
               <div class="product-item-pic">
-                <img :src="eternals.eternal_img" alt="">
+                <img :src="'http://127.0.0.1:5000/'+chocolates.chocolate_img" alt="">
               </div>
               <div class="product-item-info">
                 <!-- <div class="product-item-info-tags">
                   <span>{{eternals.eternal_best}}</span>
                 </div> -->
-                <div class="product-item-info-name  text-overflow ">{{eternals.eternal_my}}</div>
+                <div class="product-item-info-name  text-overflow ">{{chocolates.chocolate_my}}</div>
                 <div class="product-item-info-bottom">
                   <div class="product-item-info-bottom-left">
                     <p class="product-item-info-prices">
-                      <strong>{{eternals.eternal_original}}</strong>
-                      <s>{{eternals.eternal_activity}}</s>
+                      <strong>{{chocolates.chocolate_original}}</strong>
+                      <s>{{chocolates.chocolate_activity}}</s>
                     </p>
-                    <p class="product-item-info-sales">{{eternal.eternal_slod}}</p>
+                    <p class="product-item-info-sales">{{chocolates.chocolate_slod}}</p>
                   </div>
                   <div class="product-item-info-bottom-right">
                     <i class="iconfont icon-gouwuche"></i>
@@ -41,9 +41,9 @@
       <section class="brand">
         <h3 class="brand-title">为什么要选择我们</h3>
         <div class="brand-list">
-          <div class="brand-item" v-for="(selectmys,index) in selectmy" :key="index">
-            <img :src="selectmys.selectmy_img" alt=""> 
-            <p>{{selectmys.selectmy_what}}</p>
+          <div class="brand-item" v-for="(whats,index) in what" :key="index">
+            <img :src="'http://127.0.0.1:5000/'+whats.homeWhath_img" alt=""> 
+            <p>{{whats.homeWhathwhat_what}}</p>
           </div>
         </div>
       </section> 
@@ -53,28 +53,27 @@
 export default {
     data() {
       return {
-        eternal: [
-          { eternal_img:require('@/assets/img/body/1201003.jpg_220x240.jpg')
-          ,eternal_best:'礼盒装畅销款',eternal_my:'奢悦之美巧克力礼盒·夹心巧克力',
-          eternal_original:'¥158',eternal_activity:'¥358',eternal_slod:'已销售5062件' },
-          { eternal_img:require('@/assets/img/body/1204041.jpg_220x240.jpg')
-          ,eternal_best:'火热畅销款',eternal_my:'Felchlin妃亭16粒装巧克力礼盒·德国进口夹心手工巧克力',
-          eternal_original:'¥298',eternal_activity:'¥298',eternal_slod:'已销售3327件' },
-          { eternal_img:require('@/assets/img/body/1207010.jpg_220x240.jpg')
-          ,eternal_best:'新品',eternal_my:'迪奥口红#999+迪奥花漾淡香水30ml·口红+香水礼盒套装',
-          eternal_original:'¥288',eternal_activity:'¥388',eternal_slod:'已销售4621件' },
-          { eternal_img:require('@/assets/img/body/1204060.jpg_220x240.jpg')
-          ,eternal_best:'热销新品',eternal_my:'德国进口LAUENSTEIN巧克力手工松露酒味夹心金装礼盒·德国进口酒心黑巧克力20粒',
-          eternal_original:'¥318',eternal_activity:'¥418',eternal_slod:'已销售23件' },
-        ],
-        selectmy: [
-          { selectmy_img:require('@/assets/img/body/m_details_brand_01.png'), selectmy_what:'获评鲜花龙头企业'},
-          { selectmy_img:require('@/assets/img/body/m_details_brand_02.png'), selectmy_what:'1~3小时送花上门'},
-          { selectmy_img:require('@/assets/img/body/m_details_brand_03.png'), selectmy_what:'赛事冠军花艺师团队'},
-          { selectmy_img:require('@/assets/img/body/m_details_brand_04.png'), selectmy_what:'严选花材'},
-          { selectmy_img:require('@/assets/img/body/m_details_brand_05.png'), selectmy_what:'12道严苛品控标准'},
-          { selectmy_img:require('@/assets/img/body/m_details_brand_06.png'), selectmy_what:'500万用户信赖好评'},
-        ]
+        chocolate:null,
+        what:null,
+      }
+    },
+    created() {
+      this.getChocolate()
+      this.getWhat()
+    },
+    methods: {
+      getChocolate() {
+        let url = "api/home/chocolate";
+        this.axios.get(url).then(res => {
+         this.chocolate = res.data.homeChocolate
+        })
+      },
+      // 团队介绍
+      getWhat() {
+         let url = "api/home/what";
+         this.axios.get(url).then(res => {
+         this.what = res.data.homeWhat
+        })
       }
     }
 }

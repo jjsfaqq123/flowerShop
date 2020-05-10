@@ -16,7 +16,6 @@ export default {
     },
     mounted() {
       window.onscroll=function() {
-        console.log(2)
         //获得目前滚动的距离
         var scrollTop =document.documentElement.scrollTop||document.body.scrollTop;
         // console.log(scrollTop)

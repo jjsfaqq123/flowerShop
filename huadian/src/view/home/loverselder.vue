@@ -3,25 +3,25 @@
     <section class="product">
       <h3 class="product-title">送长辈鲜花</h3>
       <div class="product-list">
-        <div class="product-item product-item-horizontal" v-for="(flowerss , index) in flowers" :key="index">
+        <div class="product-item product-item-horizontal" v-for="(elders , index) in elder" :key="index">
           <router-link to="" class="navigation">
             <div class="product-item-pic">
-              <img :src="flowerss.flowers_img" alt="">
+              <img :src="'http://127.0.0.1:5000/'+elders.Elder_img" alt="">
             </div>
             <div class="product-item-info">
-              <p class="product-item-info-name text-overflow">{{flowerss.flowers_always}}</p>
-              <p class="product-item-info-desc text-overflow-line2 ">{{flowerss.flowers_boutique}}</p>
+              <p class="product-item-info-name text-overflow">{{elders.Elder_always}}</p>
+              <p class="product-item-info-desc text-overflow-line2 ">{{elders.Elder_boutique}}</p>
               <div class="product-item-info-tags">
-                <span class="tag-promo">{{flowerss.flowers_sest}}</span>
+                <span class="tag-promo">{{elders.Elder_classic}}</span>
               </div>
-              <div class="product-item-info-promo">{{flowerss.flowers_classic}}</div>
+              <div class="product-item-info-promo">￥{{elders.Elder_blodprice}}</div>
               <div class="product-item-info-bottom">
                 <div class="product-item-info-bottom-left">
                   <p class="product-item-info-prices">
-                    <strong>{{flowerss.flowers_blodprice}}</strong>
-                    <s>{{flowerss.flowers_price}}</s>
+                    <strong>￥{{elders.Elder_price}}</strong>
+                    <s>{{elders.Elder_sell}}</s>
                   </p>
-                  <p class="product-item-info-sales">{{flowerss.flowers_sell}}</p>
+                  <p class="product-item-info-sales">{{elders.Elder_sest}}</p>
                 </div>
                 <div class="product-item-info-bottom-right">
                   <i class="iconfont icon-gouwuche"></i>
@@ -42,23 +42,18 @@
 export default {
   data() {
     return {
-      flowers: [
-        {flowers_img:require("@/assets/img/body/9012092.jpg_220x240.jpg"),
-        flowers_always:'母爱',flowers_boutique:"紫红色康乃馨9枝，粉色多头康乃馨10枝",
-        flowers_classic:"红粉搭配  花色明艳" , flowers_blodprice:'￥162', flowers_price:'￥228',flowers_sell:'已销售1.6万件', flowers_sest:'母亲最爱'},
-        {flowers_img:require("@/assets/img/body/9012332.jpg_220x240.jpg"),
-        flowers_always:'留住好时光',flowers_boutique:"粉绣球1枝，粉雪山玫瑰6枝",
-        flowers_classic:"精选昆明A级花材" , flowers_blodprice:'¥239', flowers_price:'¥306',flowers_sell:'已销售9683件',flowers_sest:'热卖推荐'},
-        {flowers_img:require("@/assets/img/body/9012095.jpg_220x240.jpg"),
-        flowers_always:'幸福绽放',flowers_boutique:"粉色康乃馨19枝",
-        flowers_classic:"温暖之选 亮丽花色" , flowers_blodprice:'¥172', flowers_price:'¥215',flowers_sell:'已销售1.3万件',flowers_sest:'人气推荐'},
-        {flowers_img:require("@/assets/img/body/9012461.jpg_220x240.jpg"),
-        flowers_always:'韩式系列/温柔以待',flowers_boutique:"粉色康乃馨13枝，戴安娜玫瑰5枝、粉色洋桔梗5枝、浅紫紫罗兰5枝、尤加利10枝",
-        flowers_classic:"韩式系列 母亲节新品" , flowers_blodprice:'¥239', flowers_price:'¥299',flowers_sell:'已销售128件',flowers_sest:'韩式系列新品'},
-        {flowers_img:require("@/assets/img/body/9012189.jpg_220x240.jpg"),
-        flowers_always:'恩情无限',flowers_boutique:"粉色康乃馨11枝，百合2枝",
-        flowers_classic:"精选花材 精心设计" , flowers_blodprice:'¥178', flowers_price:'¥232',flowers_sell:'已销售1.3万件',flowers_sest:'人气推荐'},
-      ]
+      elder:null,
+    }
+  },
+  created() {
+    this.getElder();
+  },
+  methods: {
+    getElder() {
+      let url = "api/home/elder";
+      this.axios.get(url).then(res => {
+        this.elder = res.data.homeEler;
+      })
     }
   }
 }

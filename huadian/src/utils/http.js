@@ -5,50 +5,46 @@ import router from "../router"
 import CryptoJS from 'crypto-js'
 import Vue from 'vue'
 let cancel = {};
-let CancelToken = axios.CancelToken;
+// let CancelToken = axios.CancelToken;
 //响应拦截 401 token过期处理
-axios.interceptors.response.use(response => {
-  if(response.data.status !=1) {
-    if(response.data.status == -100) {
-      return false;
-    }
-  }
-  return response;
-},error => {
-  const {status} = error.response;
-  switch (status) {
-    case 401:
-      //页面跳转
-      router.push("/login");
-      break;
-    case 500: 
-    //重定向
-    router.push('*')
-    break;
-  }
-  return Promise.reject(error);
-}
-)
+// axios.interceptors.response.use(response => {
+//   if(response.data.status !=1) {
+//     if(response.data.status == -100) {
+//       return false;
+//     }
+//   }
+//   return response;
+// },error => {
+//   const {status} = error.response;
+//   switch (status) {
+//     case 401:
+//       //页面跳转
+//       router.push("/login");
+//       break;
+//     case 500: 
+//     //重定向
+//     router.push('*')
+//     break;
+//   }
+//   return Promise.reject(error);
+// })
 //请求超时
-axios.defaults.timeout = 10000;
+// axios.defaults.timeout = 10000;
 //配置初始地址
-axios.defaults.baseURL=('http://127.0.0.1:5000/');
+// axios.defaults.baseURL=('http://127.0.0.1:5000/');
 //get请求
 //封装请求
 
 class Axios extends Vue {
-  //get请求
+  //自定义封装get请求
   get(url,param){
     return new Promise((resolve,reject)=>{
-      axios({
-        method:'get',
-        url,
+      axios.get(url,{
         params:param,
-        cancelToken:new CancelToken(c => {
-          cancel = c;
-        })
+        // cancelToken:new CancelToken(c => {
+        //   cancel = c;
+        // })
       }).then(res => {
-       
         resolve(res)
          console.log(res.data)
       }).catch(err => {

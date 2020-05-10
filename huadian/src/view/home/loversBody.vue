@@ -6,7 +6,7 @@
         <div class="product-item product-item-horizontal" v-for="(flowerss , index) in flowers" :key="index">
           <router-link to="" class="navigation">
             <div class="product-item-pic">
-              <img :src="flowerss.flowers_img" alt="">
+              <img :src="'http://127.0.0.1:5000/'+flowerss.flower_img" alt="">
             </div>
             <div class="product-item-info">
               <p class="product-item-info-name text-overflow">{{flowerss.flowers_always}}</p>
@@ -18,7 +18,7 @@
               <div class="product-item-info-bottom">
                 <div class="product-item-info-bottom-left">
                   <p class="product-item-info-prices">
-                    <strong>{{flowerss.flowers_blodprice}}</strong>
+                    <strong>￥{{flowerss.flowers_blodprice}}</strong>
                     <s>{{flowerss.flowers_price}}</s>
                   </p>
                   <p class="product-item-info-sales">{{flowerss.flowers_sell}}</p>
@@ -42,23 +42,20 @@
 export default {
   data() {
     return {
-      flowers: [
-        {flowers_img:require("@/assets/img/body/9010966.jpg_220x240.jpg"),
-        flowers_always:'一往情深',flowers_boutique:"精品玫瑰礼盒:19枝红玫瑰，勿忘我0.1扎",
-        flowers_classic:"经典爆款，年销售冠军！" , flowers_blodprice:'￥249', flowers_price:'￥315',flowers_sell:'已销售12.0万件'},
-        {flowers_img:require("@/assets/img/body/9010011.jpg_220x240.jpg"),
-        flowers_always:'一心一意',flowers_boutique:"玫瑰11枝，粉色勿忘我0.3扎",
-        flowers_classic:"经典款式 精选爆款" , flowers_blodprice:'￥139', flowers_price:'￥189',flowers_sell:'已销售11.7万件',flowers_sest:'畅销爆款'},
-        {flowers_img:require("@/assets/img/body/9012009.jpg_220x240.jpg"),
-        flowers_always:'忘情巴黎',flowers_boutique:"33枝红玫瑰",
-        flowers_classic:"浪漫唯美 女神挚爱" , flowers_blodprice:'￥298', flowers_price:'￥382',flowers_sell:'已销售6.7万件',flowers_sest:'畅销爆款'},
-        {flowers_img:require("@/assets/img/body/9012455.jpg_220x240.jpg"),
-        flowers_always:'韩式系列/亲爱的你',flowers_boutique:"粉佳人玫瑰16枝、白和粉色洋桔梗各5枝、尤加利10枝、浅紫色小菊3枝、深粉色绣球1枝",
-        flowers_classic:"花艺师打造 韩式花束系列" , flowers_blodprice:'￥368', flowers_price:'￥469',flowers_sell:'已销售6.7万件',flowers_sest:'全新韩式系列'},
-        {flowers_img:require("@/assets/img/body/9012177.jpg_220x240.jpg"),
-        flowers_always:'不变的承诺',flowers_boutique:"99枝红玫瑰",
-        flowers_classic:"经典99枝，鼎力推荐！" , flowers_blodprice:'￥520', flowers_price:'￥869',flowers_sell:'已销售6.3万件',flowers_sest:'全新韩式系列'},
-      ]
+      flowers:null,
+    }
+  },
+  created() {
+    this.flower()
+  },
+  methods: {
+   async flower() {
+     let res = "api/home/flower"
+      this.axios.get(res).then(res => {
+        if(res.data.code === 1) {
+          this.flowers = res.data.homeLove
+        }
+      })
     }
   }
 }
