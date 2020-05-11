@@ -36,6 +36,7 @@
     </div>
 </template>
 <script>
+import { homeGift } from "@/service/api";
 export default {
     data() {
       return {
@@ -46,11 +47,13 @@ export default {
       this.getGift()
     },
     methods: {
-      getGift() {
-        let url = 'api/home/gift';
-        this.axios.get(url).then(res => {
-          this.gift = res.data.homeGift
-        })
+     async getGift() {
+        let res = await homeGift();
+          if(res.data.code === 1 ) {
+          this.gift = res.data.homeGift;
+        }else {
+          this.gift = res.data.msg;
+        }
       }
     }
 }

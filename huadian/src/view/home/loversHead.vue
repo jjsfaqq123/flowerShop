@@ -85,7 +85,7 @@
   </div>
 </template>
 <script>
-// import { homeUser } from "@/service/api";
+import { homeBarthday } from "@/service/api";
 export default {
   data() {
     return {
@@ -101,10 +101,9 @@ export default {
     this.procatBarthday()
   },
   methods: {
-      procatBarthday() {
-      let url = "api/home/barthday"
-      this.axios.get(url).then((res)=> {
+      async procatBarthday() {
         //判断返回数据是否返回
+        let res = await homeBarthday();
         if(res.data.code === 1) {
           this.proca = res.data.barthday[0];
           this.scenc = res.data.barthday[1];
@@ -112,8 +111,14 @@ export default {
           this.fresh = res.data.barthday[3];
           this.images = res.data.barthday[4];
           this.fonts = res.data.barthday[5]
+        }else {
+           this.proca = res.data.msg;
+           this.scenc = res.data.msg;
+           this.lovers = res.data.msg;
+           this.fresh = res.data.msg;
+           this.images = res.data.msg;
+           this.fonts = res.data.msg;
         }
-      })
     }
   }
 };

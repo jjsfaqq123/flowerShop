@@ -2,9 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import axios from "axios"
-Vue.prototype.axios = axios
-axios.defaults.baseURL=('http://127.0.0.1:5000/');
+// import axios from "axios"
+// Vue.prototype.axios = axios
+// axios.defaults.baseURL=('http://127.0.0.1:5000/');
 //引入vant
 import Vant from 'vant';
 import 'vant/lib/index.css';

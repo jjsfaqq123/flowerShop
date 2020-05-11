@@ -37,8 +37,8 @@
     </section>
   </div>
 </template>
-
 <script>
+import  { homeLovers } from '@/service/api';
 export default {
   data() {
     return {
@@ -50,12 +50,12 @@ export default {
   },
   methods: {
    async flower() {
-     let res = "api/home/flower"
-      this.axios.get(res).then(res => {
+     let res = await homeLovers() 
         if(res.data.code === 1) {
-          this.flowers = res.data.homeLove
+          this.flowers = res.data.homeLove;
+        }else {
+          this.flowers = res.data.msg;
         }
-      })
     }
   }
 }

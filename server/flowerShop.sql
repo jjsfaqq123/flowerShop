@@ -263,3 +263,124 @@ INSERT INTO homeWtat VALUES (NULL,'body/m_details_brand_03.png','赛事冠军花
 INSERT INTO homeWtat VALUES (NULL,'body/m_details_brand_04.png','严选花材');
 INSERT INTO homeWtat VALUES (NULL,'body/m_details_brand_05.png','12道严苛品控标准');
 INSERT INTO homeWtat VALUES (NULL,'body/m_details_brand_06.png','500万用户信赖好评');
+
+
+-- 插入homeDetailsMother表
+SET NAMES UTF8;
+DROP DATABASE IF EXISTS homeDetailsMother;
+CREATE TABLE homeDetailsMother (
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
+  `pro_img`         VARCHAR(255),
+  `pro_title`       CHAR(200),
+  `pro_titles`      CHAR(200),
+  `pro_titleTo`     CHAR(200),
+  `pro_price`       DECIMAL(8,2),
+  `pro_imgs`        VARCHAR(255)
+);
+
+INSERT INTO homeDetailsMother  VALUES (
+  NULL,'homedetails/m_mother_pro_1.jpg','韩式新品','韩式系列/温柔以待',
+  '母亲节新品','275','homedetails/m_mother_buy_btn.png');
+INSERT INTO homeDetailsMother  VALUES (
+  NULL,'homedetails/m_mother_pro_2.jpg','热销爆款',
+  '母爱','浪漫配色.美好寓意','186','homedetails/m_mother_buy_btn.png');
+
+-- 创建homeDetailsMother表
+SET NAMES UTF8;
+DROP DATABASE IF EXISTS homeDetailsUnder;
+CREATE TABLE homeDetailsUnder (
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
+  `normal_img`      VARCHAR(200),
+  `normal_title`    CHAR(200),
+  `normal_titles`   CHAR(200),
+  `normal_titleTo`  CHAR(200),
+  `normal_price`    DECIMAL(8,2),
+  `normal_imgs`     VARCHAR(255)
+);
+-- 插入homeDetailsMother表
+INSERT INTO homeDetailsUnder  VALUES (
+NULL,'homedetails/9012204.jpg_220x240.jpg','请选爆款','幸福万年长',
+'长情陪伴.默默守护','389','homedetails/m_mother_buy_btn.png');
+INSERT INTO homeDetailsUnder  VALUES (
+  NULL,'homedetails/9012332.jpg_220x240.jpg','精美花篮','留住好时光','守护她曼妙的少女心','275','homedetails/m_mother_buy_btn.png');
+INSERT INTO homeDetailsUnder  VALUES (
+  NULL,'homedetails/1073173.jpg_220x240.jpg','定制礼盒','柔情时光-进口香氛款','倾情设计·为爱守护','388','homedetails/m_mother_buy_btn.png');
+INSERT INTO homeDetailsUnder  VALUES (
+  NULL,'homedetails/1073276.jpg_220x240.jpg','创意新品','花好月圆永生花台灯/母亲节定制','母亲节定制款','298','homedetails/m_mother_buy_btn.png');
+
+
+-- 创建homeDetailsElegant表
+SET NAMES UTF8;
+DROP DATABASE IF EXISTS homeDetailsElegant;
+CREATE TABLE homeDetailsElegant (
+   `id` INT PRIMARY KEY AUTO_INCREMENT,
+  `elegant_img`      VARCHAR(200),
+  `elegant_title`    CHAR(200),
+  `elegant_titles`   CHAR(200),
+  `elegant_titleTo`  CHAR(200),
+  `elegant_price`    DECIMAL(8,2),
+  `elegant_imgs`     VARCHAR(255)
+);
+-- 插入homeDetailsElegant表
+INSERT INTO homeDetailsElegant  VALUES (
+NULL,'homedetails/9010845.jpg_220x240.jpg','人气力荐','幸福典藏',
+'珍藏一幕幕幸福的记忆','169','homedetails/m_mother_buy_btn.png');
+INSERT INTO homeDetailsElegant  VALUES (
+NULL,'homedetails/9010741.jpg_220x240.jpg','人气力荐','健康长久',
+'愿您平安喜乐','515','homedetails/m_mother_buy_btn.png');
+INSERT INTO homeDetailsElegant  VALUES (
+NULL,'homedetails/9012094.jpg_220x240.jpg','母亲节款','牵挂',
+'妈妈，您是我唯一的牵挂','286','homedetails/m_mother_buy_btn.png');
+INSERT INTO homeDetailsElegant  VALUES (
+NULL,'homedetails/9010963.jpg_220x240.jpg','送礼优选','最思恋',
+'精品乃馨礼盒','236','homedetails/m_mother_buy_btn.png');
+INSERT INTO homeDetailsElegant  VALUES (
+NULL,'homedetails/9012314.jpg_220x240.jpg','送礼优选','温馨问候',
+'大声说出妈妈我爱你','339','homedetails/m_mother_buy_btn.png');
+INSERT INTO homeDetailsElegant  VALUES (
+NULL,'homedetails/9012095.jpg_220x240.jpg','送礼优选','幸福绽放',
+'优雅设计·精致甄选','196','homedetails/m_mother_buy_btn.png');
+INSERT INTO homeDetailsElegant  VALUES (
+NULL,'homedetails/9012189.jpg_220x240.jpg','人力推荐','恩情无限',
+'时光易逝·恩情永恒','212','homedetails/m_mother_buy_btn.png');
+INSERT INTO homeDetailsElegant  VALUES (
+NULL,'homedetails/9010842.jpg_220x240.jpg','畅销爆款','感恩密码',
+'人生路上·感恩有你','196','homedetails/m_mother_buy_btn.png');
+
+
+-- 创建homeDetailsFragrant表
+SET NAMES UTF8;
+DROP DATABASE IF EXISTS homeDetailsFragrant;
+CREATE TABLE homeDetailsFragrant (
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
+  `fragrant_img`      VARCHAR(200),
+  `fragrant_title`    CHAR(200),
+  `fragrant_titles`   CHAR(200),
+  `fragrant_titleTo`  CHAR(200),
+  `fragrant_price`    DECIMAL(8,2),
+  `fragrant_imgs`     VARCHAR(255)
+);
+INSERT INTO homeDetailsFragrant  VALUES (
+NULL,'homedetails/9012334.jpg_220x240.jpg','精美花篮','幸福满溢',
+'花篮设计·送礼百搭','286','homedetails/m_mother_buy_btn.png');
+INSERT INTO homeDetailsFragrant  VALUES (
+NULL,'homedetails/9012047.jpg_220x240.jpg','精美花篮','爱的思念',
+'有一种很玄的东西叫思念','269','homedetails/m_mother_buy_btn.png');
+INSERT INTO homeDetailsFragrant  VALUES (
+NULL,'homedetails/9012243.jpg_220x240.jpg','经典爆款','恋恋情深',
+'简约时尚·高级大方','236','homedetails/m_mother_buy_btn.png');
+INSERT INTO homeDetailsFragrant  VALUES (
+NULL,'homedetails/9012163.jpg_220x240.jpg','A级花材','甜蜜物语',
+'整个心里都是你','463','homedetails/m_mother_buy_btn.png');
+INSERT INTO homeDetailsFragrant  VALUES (
+NULL,'homedetails/9012460.jpg_220x240.jpg','韩式爆款','韩式系列/牵挂你',
+'母亲节新品','330','homedetails/m_mother_buy_btn.png');
+INSERT INTO homeDetailsFragrant  VALUES (
+NULL,'homedetails/9012451.jpg_220x240.jpg','韩式爆款','韩式系列/公主的假日',
+'甜美的公主·今夜你最美','259','homedetails/m_mother_buy_btn.png');
+INSERT INTO homeDetailsFragrant  VALUES (
+NULL,'homedetails/9012193.jpg_220x240.jpg','母亲节人气款','暖暖情意',
+'无限的眷恋 来源于爱的温暖','419','homedetails/m_mother_buy_btn.png');
+INSERT INTO homeDetailsFragrant  VALUES (
+NULL,'homedetails/9012093.jpg_220x240.jpg','送礼优选','永恒的爱',
+'母亲的爱是永恒的，她是一颗不落的星','307','homedetails/m_mother_buy_btn.png');

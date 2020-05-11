@@ -129,7 +129,7 @@ server.get('/api/home/chocolate',(req,res) => {
   })
 })
 
-//请求接口首页行业介绍  /api/home/what
+//请求接口首页团队介绍  /api/home/what
 server.get('/api/home/what',(req,res) => {
   // 创建sql语句
   let  sql = "SELECT * FROM homeWtat";
@@ -139,6 +139,22 @@ server.get('/api/home/what',(req,res) => {
       res.send({ code:1,msg:'',homeWhat:result});
     }else {
       res.send({ code:0, msg:'没有你要查找的数据'})
+    }
+  })
+})
+
+//请求接口首页详情页母亲节接口 /api/homeDetaild/mother
+server.get('/api/homeDetails/mother',(req,res) => {
+  //创建sql语句
+  let sql = "SELECT * FROM homeDetailsMother;SELECT * FROM homeDetailsUnder;SELECT * FROM homeDetailsElegant;"+
+  "SELECT * FROM homeDetailsFragrant"
+  pool.query(sql, (err,result) => {
+    console.log(result)
+    if(err) throw err;
+    if(result.length>0) {
+      res.send({ code:1, msg:'' , homeDetailsMother:result});
+    }else {
+      res.send({ code:0 , msg:'没有你要查找的数据'});
     }
   })
 })

@@ -36,6 +36,7 @@
     </div>
 </template>
 <script>
+import { homeEternal } from "@/service/api";
 export default {
     data() {
       return {
@@ -46,12 +47,14 @@ export default {
       this.getEternal()
     },
     methods:{
-      getEternal() {
+     async getEternal() {
         //请求url
-        let url = "api/home/eternal"
-        this.axios.get(url).then(res => {
-          this.eternal = res.data.homeEternal
-        })
+        let res = await homeEternal();
+          if(res.data.code === 1 ) {
+          this.eternal = res.data.homeEternal;
+          }else {
+             this.eternal = res.data.msg;
+          }
       }
     }
 }

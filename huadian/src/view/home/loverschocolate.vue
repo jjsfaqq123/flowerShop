@@ -50,6 +50,7 @@
     </div>
 </template>
 <script>
+import { homeChocclate,homeTeam } from "@/service/api";
 export default {
     data() {
       return {
@@ -62,18 +63,14 @@ export default {
       this.getWhat()
     },
     methods: {
-      getChocolate() {
-        let url = "api/home/chocolate";
-        this.axios.get(url).then(res => {
-         this.chocolate = res.data.homeChocolate
-        })
+     async getChocolate() {
+        let res = await homeChocclate();
+         this.chocolate = res.data.homeChocolate;
       },
       // 团队介绍
-      getWhat() {
-         let url = "api/home/what";
-         this.axios.get(url).then(res => {
-         this.what = res.data.homeWhat
-        })
+     async getWhat() {
+         let res = await homeTeam();
+         this.what = res.data.homeWhat;
       }
     }
 }

@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import { homeElder } from "@/service/api"
 export default {
   data() {
     return {
@@ -49,11 +50,13 @@ export default {
     this.getElder();
   },
   methods: {
-    getElder() {
-      let url = "api/home/elder";
-      this.axios.get(url).then(res => {
+     async getElder() {
+      let res = await homeElder();
+      if(res.data.code === 1){
         this.elder = res.data.homeEler;
-      })
+      }else {
+        this.elder = res.data.msg;
+      }
     }
   }
 }

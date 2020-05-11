@@ -17,30 +17,28 @@
           <img src="@/assets/img/homedetails/m_mother_title_1.png" alt="">
         </div>
         <div class="product-list">
-          <div class="product-item-row" v-for="(pros,index) in pro" :key="'av'+index">
+          <div class="product-item-row" v-for="(mothers,index) in mother" :key="'av'+index">
             <router-link to="">
               <div class="product-item-pic">
-                <img :src="pros.pro_img" alt="">
-                <span class="product-item-tag1">{{pros.pro_title}}</span>
+                <img :src="'http://127.0.0.1:5000/'+mothers.pro_img" alt="">
+                <span class="product-item-tag1">{{mothers.pro_title}}</span>
               </div>
               <div class="product-item-info">
                 <div class="product-item-info-header">
-                  <span class="product-item-info-name">{{pros.pro_titles}}</span>
+                  <span class="product-item-info-name">{{mothers.pro_titles}}</span>
                 </div>
-                <div class="product-item-info-desc">{{pros.pro_titleTo}}</div>
+                <div class="product-item-info-desc">{{mothers.pro_titleTo}}</div>
                 <div class="product-item-info-right">
-                  <span class="product-item-info-price">{{pros.pro_price}}</span>
-                  <img :src="pros.pro_imgs" alt="" class="product-item-info-buy">
+                  <span class="product-item-info-price">{{mothers.pro_price}}</span>
+                  <img :src="'http://127.0.0.1:5000/'+mothers.pro_imgs" alt="" class="product-item-info-buy">
                 </div>
               </div>
             </router-link>
           </div>
-        
-
           <div class="product-item-normal" v-for="(normals,index) in normal" :key="index">
             <router-link to="">
               <div class="product-item-pic">
-                <img :src="normals.normal_img" alt="">
+                <img :src="'http://127.0.0.1:5000/'+normals.normal_img" alt="">
                 <div class='product-item-tag1'>{{normals.normal_title}}</div>
               </div>
               <div class="product-item-info">
@@ -48,13 +46,17 @@
                 <div class="product-item-info-desc">{{normals.normal_titleTo}}</div>
                 <div class="product-item-info-footer">
                   <span class="product-item-info-price">{{normals.normal_price}}</span>
-                  <img :src="normals.normal_imgs" alt="购物车" class="product-item-info-buy">
+                  <img :src="'http://127.0.0.1:5000/'+normals.normal_imgs" alt="购物车" class="product-item-info-buy">
                 </div>
               </div>
             </router-link>
           </div>
         </div>
       </div>
+      <!-- 淡雅馨香 -->
+      <elegant></elegant>
+      <!-- 浪漫永生花-->
+      <fragrant></fragrant>
         <div class="scroll" @click="scrollClick">
         <div class="scroll-item">
           <router-link to="#" class="iconfont icon-xiangshangjiantou-copy" id="backTop"></router-link>
@@ -65,10 +67,15 @@
 </template>
 <script>
 import headBox from "@/components/header/headBox";
+import { homeDetailsMother } from "@/service/api";
+import elegant from "@/view/game/mother/elegant";
+import fragrant from "@/view/game/mother/fragrant";
 export default {
   data() {
     return {
       Active:'',
+      mother:null,
+      normal:null,
       procat:[
         {title:"人气爆品"},
         {title:"送老妈"},
@@ -76,32 +83,16 @@ export default {
         {title:"永生花"},
         {title:"精挑细选"},
       ],
-      pro: [
-        {pro_img:require("@/assets/img/homedetails/m_mother_pro_1.jpg"),
-        pro_title:'韩式新品',pro_titles:"韩式系列/温柔以待",pro_titleTo:"母亲节新品",
-        pro_price:"￥275",pro_imgs:require("@/assets/img/homedetails/m_mother_buy_btn.png")},
-        {pro_img:require("@/assets/img/homedetails/m_mother_pro_2.jpg"),
-        pro_title:'热销爆款',pro_titles:"母爱",pro_titleTo:"浪漫配色.美好寓意",
-        pro_price:"￥186",pro_imgs:require("@/assets/img/homedetails/m_mother_buy_btn.png")},
-      ],
-      normal: [
-        {normal_img:require('@/assets/img/homedetails/9012204.jpg_220x240.jpg'),
-        normal_title:"请选爆款",normal_titles:"幸福万年长",normal_titleTo:"长情陪伴.默默守护",
-        normal_price:"￥389" ,normal_imgs:require("@/assets/img/homedetails/m_mother_buy_btn.png")},
-        {normal_img:require('@/assets/img/homedetails/9012332.jpg_220x240.jpg'),
-        normal_title:"精美花篮",normal_titles:"留住好时光",normal_titleTo:"守护她曼妙的少女心",
-        normal_price:"￥275" ,normal_imgs:require("@/assets/img/homedetails/m_mother_buy_btn.png")},
-        {normal_img:require('@/assets/img/homedetails/1073173.jpg_220x240.jpg'),
-        normal_title:"定制礼盒",normal_titles:"柔情时光-进口香氛款",normal_titleTo:"倾情设计·为爱守护",
-        normal_price:"￥388" ,normal_imgs:require("@/assets/img/homedetails/m_mother_buy_btn.png")},
-        {normal_img:require('@/assets/img/homedetails/1073276.jpg_220x240.jpg'),
-        normal_title:"创意新品",normal_titles:"花好月圆永生花台灯/母亲节定制",normal_titleTo:"母亲节定制款",
-        normal_price:"￥298" ,normal_imgs:require("@/assets/img/homedetails/m_mother_buy_btn.png")},
-      ]
+     
     }
   },
   components: {
-    headBox
+    headBox,
+    elegant,
+    fragrant,
+  },
+  created() {
+    this.getMother();
   },
   mounted() {
     window.onscroll =() => {
@@ -125,6 +116,16 @@ export default {
            clearInterval(timeTop)
          }
        },10)
+    },
+    async getMother() {
+      let res = await homeDetailsMother();
+      if(res.data.code === 1) {
+        this.mother = res.data.homeDetailsMother[0];
+        this.normal = res.data.homeDetailsMother[1];
+      }else {
+        this.mother = res.data.msg;
+        this.normal = res.data.msg;
+      }
     }
   }
 }
@@ -164,116 +165,5 @@ export default {
     width: 100%;
     max-width: 45.71428571rem;
   }
-  .product{
-    .product-title {
-      padding:0 2.26666667%;
-      font-size: 0;
-    }
-    .product-list {
-      padding:0 2.26666667%;
-      font-size: 0;
-    } 
-    .product-item-normal {
-      display: inline-block;
-      width: 48.04469274%;
-      margin: 0 0.97765363% 0.5rem;
-      vertical-align: top;
-      position: relative;
-    }
-  }
-  section.main .product-item-row ,.product-item-normal{
-    margin: 0 0.97765363% 0.5rem;
-    border-radius: 0.57142857rem;
-    overflow: hidden;
-    a{
-      .product-item-pic {
-        position: relative;
-        .product-item-tag1 {
-          position: absolute;
-          top: 0.57142857rem;
-          left: 0;
-          height: 1.42857143rem;
-          line-height: 1.42857143rem;
-          background-size: cover;
-          background-position: right center;
-          color: #ffffff;
-          font-size: 0.85714286rem;
-          font-weight: 500;
-          padding: 0 0.42857143rem;
-          background:url('../../../assets/img/homedetails/m_mother_tag_bg.png') no-repeat;
-        }
-      }
-      .product-item-info {
-        position: relative;
-        padding: 0.85714286rem;
-        background: linear-gradient(90deg, #fff4f3 0%, #f7d3d1 100%);
-        .product-item-info-header {
-          .product-item-info-name {
-            font-size: 0.92857143rem;
-            font-weight: 400;
-            color: #232628;
-            line-height: 1rem;
-          }
-        }
-        .product-item-info-desc {
-          margin-top: 0.64285714rem;
-          font-size: 0.85714286rem;
-          font-weight: 600;
-          color: #EB4247;
-          max-width: 55%;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-        .product-item-info-right {
-          position: absolute;
-          bottom: 0.85714286rem;
-          right: 0.85714286rem;
-          .product-item-info-price {
-            color: #232628;
-            font-size: 1.07142857rem;
-            font-weight: 600;
-            line-height: 1.5rem;
-            vertical-align: middle;
-          }
-          .product-item-info-buy {
-            margin-left: 1.78571429rem;
-            width: 1.71428571rem;
-          }
-        }
-        .product-item-info-name {
-          font-size: 0.92857143rem;
-          line-height: 1rem;
-          font-weight: 400;
-          max-width: 100%;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-        .product-item-info-desc {
-          margin-top: 0.57142857rem;
-          font-size: 0.85714286rem;
-          font-weight: 600;
-          color: #EB4247;
-          line-height: 0.92857143rem;
-          max-width: 100%;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-        .product-item-info-footer {
-          margin-top: 0.85714286rem;
-          .product-item-info-price {
-            font-size: 1.07142857rem;
-            font-weight: 600;
-            line-height: 1.5rem;
-          }
-          .product-item-info-buy {
-            float: right;
-            width:1.71428571rem;
-          }
-        }
-      }
-    }
-  }
+  
 </style>
