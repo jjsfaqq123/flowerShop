@@ -1,11 +1,12 @@
 <template>
-    <div >
+    <div>
       <!-- 由于页面内容过多写在一个组件里后期不好维护而且一个组件承受的压力太太 -->
       <div>
       <!-- 主页头部 -->
       <headBox></headBox>
       <!-- <m-scroll> -->
       <!-- 主页主体一 -->
+      <div>
       <headHead ></headHead>
       <!-- 主页主体二 -->
       <headBody></headBody>
@@ -23,10 +24,13 @@
       <fonter></fonter>
       <!-- scrooll -->
       <headindicator></headindicator>
+</div>
        <!-- </m-scroll> -->
+       <tabbar></tabbar>  
       </div>
+
       <!-- 底部 -->
-      <tabbar></tabbar>  
+      
       
     </div>
 </template>

@@ -33,11 +33,11 @@ export default {
   },
   created() {
     this.getElegant();
+    
   },
   methods: {
     async getElegant() {
       let res = await homeDetailsMother();
-        console.log(res.data)
         if(res.data.code === 1) {
           this.elegant = res.data.homeDetailsMother[2];
         }else {

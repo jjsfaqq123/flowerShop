@@ -7,6 +7,12 @@ import createPersistedState from "vuex-persistedstate"
 Vue.use(Vuex)
 const state = {
   guideIndex:0,
+  purpoIndex:'',
+  prowdIndex:'',
+  occasionIndex:'',
+  flowerIndex: '',
+  categoryIndex:'',
+  colorIndex:'',
 }
 export default new Vuex.Store({
   state,

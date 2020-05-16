@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "243458",
+      "name": "iconfont-triangle-down",
+      "font_class": "triangle-down",
+      "unicode": "e650",
+      "unicode_decimal": 58960
+    },
+    {
       "icon_id": "451750",
       "name": "眼睛 闭眼 闭着眼睛",
       "font_class": "yey2-copy",

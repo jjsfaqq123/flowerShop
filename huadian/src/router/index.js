@@ -42,9 +42,45 @@ const motherDay = (resolve) => {
     resolve(module);
   });
 };
+
 //访问页面不存在
 const error = (resolve) => {
   import("@/view/error").then((module) => {
+    resolve(module)
+  })
+}
+
+//鲜花详情页
+const fresh = (resolve) => {
+  import("@/view/home/childer/fresh").then((module) => {
+    resolve(module)
+  })
+}
+
+//永生花详情
+const eternal = (resolve) => {
+  import("@/view/home/childer/eternal").then((module) => {
+    resolve(module)
+  })
+}
+
+//蛋糕详情
+const cake = (resolve) => {
+  import("@/view/home/childer/cake").then((module) => {
+    resolve(module)
+  })
+}
+
+//礼品详情
+const gift = (resolve) => {
+  import("@/view/home/childer/gift").then((module) => {
+    resolve(module)
+  })
+}
+
+//巧克力详情
+const chocolate = (resolve) => {
+  import("@/view/home/childer/chocolate").then((module) => {
     resolve(module)
   })
 }
@@ -84,7 +120,32 @@ const router = new VueRouter({
       path:'*',
       name:'error',
       component:error
-    }
+    },
+    {
+      path:'/fresh',
+      name:'fresh',
+      component:fresh
+    },
+    {
+      path:'/eternal',
+      name:'eternal',
+      component:eternal
+    },
+    {
+      path:'/cake',
+      name:'cake',
+      component:cake
+    },
+    {
+      path:'/gift',
+      name:'gift',
+      component:gift
+    },
+    {
+      path:'/chocolate',
+      name:'chocolate',
+      component:chocolate
+    },
   ],
 });
 

@@ -30,8 +30,8 @@
     </div>
     <nav class="procate">
       <div class="procate-item" v-for="(item,index) in proca" :key="index">
-        <router-link to="javascript:;" class="navigation">
-          <img :src="'http://127.0.0.1:5000/'+item.procat_img" alt="">
+        <router-link :to="item.procat_path" class="navigation">
+          <img :src="item.procat_img" alt="" >
         </router-link>
         <p>{{item.procat_title}}</p>
       </div>
@@ -74,7 +74,7 @@
       </div>
       <!-- mode 2 -->
       <div class="scene-list">
-        <div class="scene-item" v-for="(freshs ,index) in fresh" :key="index">
+        <div class="scene-item" v-for="(freshs ,index) in fres" :key="index">
           <router-link to="" class="navigation" >
             <img :src="'http://127.0.0.1:5000/'+freshs.fresh_img" :alt="freshs.fresh_title">
             <span class="scene-item-pange">{{freshs.fresh_title}}</span>
@@ -90,32 +90,36 @@ export default {
   data() {
     return {
       images:null,
-      proca:null,
       scenc:null,
       lovers:null,
-      fresh:null,
+      fres:null,
       fonts:null,
+      proca:[
+        { procat_path:'/fresh',procat_img:require('@/assets/img/body/m_home_category_flower.png'),procat_title:'鲜花'},
+        { procat_path:'/eternal',procat_img:require('@/assets/img/body/m_home_category_ppf.png'),procat_title:'永生花'},
+        { procat_path:'/cake',procat_img:require('@/assets/img/body/m_home_category_cake.png'),procat_title:'蛋糕'},
+        { procat_path:'/gift',procat_img:require('@/assets/img/body/m_home_category_gift.png'),procat_title:'礼品'},
+        { procat_path:'/chocolate',procat_img:require('@/assets/img/body/m_home_category_chocolate.png'),procat_title:'巧克力'},
+      ]
     };
   },
   created() {
-    this.procatBarthday()
+    this.procatBarthday();
   },
   methods: {
       async procatBarthday() {
         //判断返回数据是否返回
         let res = await homeBarthday();
         if(res.data.code === 1) {
-          this.proca = res.data.barthday[0];
-          this.scenc = res.data.barthday[1];
-          this.lovers = res.data.barthday[2];
-          this.fresh = res.data.barthday[3];
-          this.images = res.data.barthday[4];
-          this.fonts = res.data.barthday[5]
+          this.scenc = res.data.barthday[0];
+          this.lovers = res.data.barthday[1];
+          this.fres = res.data.barthday[2];
+          this.images = res.data.barthday[3];
+          this.fonts = res.data.barthday[4]
         }else {
-           this.proca = res.data.msg;
            this.scenc = res.data.msg;
            this.lovers = res.data.msg;
-           this.fresh = res.data.msg;
+           this.fres = res.data.msg;
            this.images = res.data.msg;
            this.fonts = res.data.msg;
         }

@@ -34,3 +34,7 @@ http.get('api/home/gift');
 //首页母亲节详情
 export const homeDetailsMother = param =>
 http.get('api/homeDetails/mother');
+
+//首页鲜花详情
+export const homeDetailsFlower = param =>
+http.get('api/homeDetails/flower');

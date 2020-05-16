@@ -11,11 +11,19 @@
 export default {
     data() {
       return {
-
+        as:""
       }
     },
     mounted() {
-      window.onscroll=function() {
+      window.addEventListener('scroll',this.getaddEvent,true);
+    },
+    destroyed() {
+      window.removeEventListener('scroll', this.getaddEvent,true);
+      
+    },
+    methods: {
+      getaddEvent() {
+         window.onscroll=function() {
         //获得目前滚动的距离
         var scrollTop =document.documentElement.scrollTop||document.body.scrollTop;
         // console.log(scrollTop)
@@ -28,7 +36,6 @@ export default {
         }
       }
     },
-    methods: {
       scrollClick() {
          var top =document.documentElement.scrollTop||document.body.scrollTop;
          const timeTop=setInterval(() => {

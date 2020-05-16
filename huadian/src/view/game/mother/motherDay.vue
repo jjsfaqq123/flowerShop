@@ -8,11 +8,11 @@
       </div>
       <nav class="procateav" >
         <ul class="procateav-box" :class="{'active':Active}">
-          <li class="procateav-item"  v-for="(procats,index) in procat" :key="index">{{procats.title}}</li>
+          <li class="procateav-item"  v-for="(procats,index) in procat" :key="index" :class="procats.show ? 'tianactive' : ''">{{procats.title}}</li>
         </ul>
       </nav>
       <!-- 人气爆品 -->
-      <div class="product">
+      <div class="product" id="pic">
         <div class="product-title">
           <img src="@/assets/img/homedetails/m_mother_title_1.png" alt="">
         </div>
@@ -77,11 +77,11 @@ export default {
       mother:null,
       normal:null,
       procat:[
-        {title:"人气爆品"},
-        {title:"送老妈"},
-        {title:"送辣妈"},
-        {title:"永生花"},
-        {title:"精挑细选"},
+        {title:"人气爆品" ,show:true},
+        {title:"送老妈" ,show:false},
+        {title:"送辣妈" ,show:false},
+        {title:"永生花" ,show:false},
+        {title:"精挑细选" ,show:false},
       ],
      
     }
@@ -104,6 +104,29 @@ export default {
       }else {
         this.Active = ''
         scroll.style.display="none";
+      };
+      //js实现楼层效果
+      // var pros = document.getElementById('pic');
+      // pros = window.document.body.clientHeight
+      // console.log(pros)
+      for (var i = 0; i < this.procat.length; i++) {  
+        let pro = this.procat[i];
+        if(scollTop>=748&&scollTop<=2030) {
+          //this.tianActive = this.procat[0];
+          this.procat[0].show = true;
+        }else {
+          this.procat[0].show = false;
+        }
+        if(scollTop>=2030&&scollTop<=3300) {
+           this.procat[1].show = true;
+        }else {
+          this.procat[1].show = false;
+        }
+        if(scollTop>=3300&&scollTop<=4300) {
+           this.procat[2].show = true;
+        }else {
+          this.procat[2].show = false;
+        }
       }
     }
   },
@@ -165,5 +188,9 @@ export default {
     width: 100%;
     max-width: 45.71428571rem;
   }
-  
+  .tianactive {
+    font-weight: bold;
+    color: #FFFFFF;
+    background: linear-gradient(90deg, #e487af 0%, #bc7cc7 100%) !important;
+  }
 </style>
