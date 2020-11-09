@@ -16,7 +16,7 @@
                 <div class="product-item-info-bottom">
                   <div class="product-item-info-bottom-left">
                     <p class="product-item-info-prices">
-                      <strong>￥{{eternals.eternal_original}}</strong>
+                      <strong>￥{{eternals.eternal_original.toFixed(2)}}</strong>
                       <s>￥{{eternals.eternal_activity}}</s>
                     </p>
                     <p class="product-item-info-sales">{{eternal.eternal_slod}}</p>

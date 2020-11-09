@@ -2,9 +2,9 @@
     <div class="">
         <header class="headerbar">
             <div class="headerbar-left">
-                <a href="" class="navigation">
+                <router-link to="/" class="navigation">
                     <img src="@/assets/img/cart/1.png" alt="" class="imgs">
-                </a>
+                </router-link>
             </div>
             <div class="headerbar-center">
                 <p class="headerbar-content">购物车</p>
@@ -12,16 +12,63 @@
         </header>
         <m-scroll>
         <section class="main animationLeft">
-            <div class="login">
+            <!-- <div class="login">
                 <span class="login-tips">登录后将同步您的购物车商品</span>
                 <router-link to="" class="login-btn">登录</router-link>
-            </div>
-            <div class="emptycart">
+            </div> -->
+            <div class="emptycart" >
                 <img src="@/assets/img/cart/m_shopping_empty_cart.png"  class="img">
                 <p class="text">购物车内暂时没有商品.</p>
                 <router-link to='/' class="home">去逛逛</router-link>
             </div>
-            <div class="guess">
+            <!-- <div >
+                <div class="promo-list">
+                    <div class='cart-item' v-for="(item,index) in addtoIndex" :key="index">
+                        <div class="cart-item-check">
+                            <i class="iconfont icon-checkbox"></i>
+                        </div>
+                        <div class="cart-item-right">
+                            <div class="cart-item-details">
+                                <div class="cart-item-pic">
+                                    <router-link to="javascript:void(0)">
+                                        <img :src="'http://127.0.0.1:5000/'+item.flower_img" alt="">
+                                    </router-link>
+                                </div>
+                                <div class="cart-item-info">
+                                    <p class="cart-item-title">
+                                        <router-link to="">
+                                            {{item.flowers_always}}
+                                        </router-link>
+                                    </p>
+                                     <div class="cart-item-inputs">
+                                        <span>数量</span>
+                                        <div class="cart-item-setnum">
+                                            <span class="btn-cut">
+                                                <i class="iconfont icon-iconfontdelete" ></i>
+                                            </span>
+                                            <input type="text" name="" id="" value="1" class="num-count">
+                                            <span class="btn-add">
+                                                <i class="iconfont icon-icon10"></i>
+                                            </span>
+                                        </div>
+                                     </div>
+                                     <p class="cart-item-price">
+                                         ￥
+                                         <span>{{item.flowers_blodprice}}</span>
+                                     </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <span class="footer-left">
+                    合计
+                    <em>￥121</em>
+                </span>
+            </footer> -->
+            <div class="guess" >
                 <div class="guess-title">猜你喜欢</div>
                 <ul class="guess-list">
                     <li class="guess-item" @click="btn" v-for="(item,i) of list" :key="i">
@@ -74,6 +121,9 @@ export default {
         },
         
     },
+    computed: {
+    ...mapState(['addtoIndex'])
+  },
 }
 </script>
 <style lang="less" scoped>
@@ -227,5 +277,139 @@ export default {
        display: block;
        content:"";
        clear: both;
+   }
+   .cart-list {
+    border-top:1px solid #E9ECF0;   
+    background:#fff;
+    font-size: 0;
+    .promo-list {
+        border-bottom: 1px solid #E9ECF0;
+        .cart-item {
+            padding:10px 0 0 ;
+            border:0;
+            overflow: hidden;
+            color: #232628;
+            .cart-item-check {
+                position: relative;
+                display: inline-block;
+                width: 11.73%;
+                height: 8.14285714rem;
+                vertical-align: top;
+                text-align: center;
+                i {
+                    display: inline-block;
+                    font-size: 1.42857143rem;
+                    margin-top: 3.28571429rem;
+                }
+            }
+            .cart-item-right {
+                padding-bottom: 1rem;
+                display: inline-block;
+                width:88.27%;
+                vertical-align: top;
+                .cart-item-details {
+                    .cart-item-pic {
+                        display: inline-block;
+                        width:31.41993958%;
+                        vertical-align: top;
+                        a {
+                            img {
+                                width: 100%;
+                                vertical-align: middle;
+                            }
+                        }
+                    }
+                    .cart-item-info {
+                        position: relative;
+                        display: inline-block;
+                        width: 60.58006%;
+                        height: 8.14285714rem;
+                        padding: 0 0.85714286rem;
+                        vertical-align: top;
+                        .cart-item-title {
+                            width:100%;
+                            a {
+                                display: inline-block;
+                                max-width: 100%;
+                                font-size: 1rem;
+                                line-height: 1.28571429rem;
+                                overflow: hidden;
+                                -o-text-overflow: ellipsis;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                            }
+                        }
+                        .cart-item-inputs {
+                            margin-top: 0.42857143rem;
+                            overflow: hidden;
+                            span {
+                                font-size: 0.85714286rem;
+                                line-height: 1.71428571rem;
+                                vertical-align: top;
+                            }
+                            .cart-item-setnum {
+                                height: 1.71428571rem;
+                                display: inline-block;
+                                margin-left: 1rem;
+                                background:  #F7F9FA;
+                                border:1px solid #E9ECF0 !important;
+                                span {
+                                     width: 1.71428571rem;
+                                    display: inline-block;
+                                    line-height: 1.57142857rem;
+                                    text-align: center;
+                                    font-size: 0.85714286rem;
+                                    vertical-align: top;
+                                }
+                                .btn-cut { 
+                                    border-right:1px solid #E9ECF0 !important;
+                                }
+                                .btn-add {
+                                     border-left:1px solid #E9ECF0 !important;
+                                }
+                                .num-count {
+                                    width: 3.92857143rem;
+                                    background-color: #F7F9FA;
+                                    font-size: 0.85714286rem;
+                                    line-height: 1.57142857rem;
+                                    text-align: center;
+                                    vertical-align: top;
+                                    outline: none;
+                                    border:0px solid #E9ECF0 !important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+   }
+   .cart-item-price {
+       position: absolute;
+       left: 0.85714286rem;
+       bottom:0;
+       font-size: 1rem;
+       color: #FF734C;
+       font-weight: 500;
+   }
+   .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3.5rem;
+    font-size: 0;
+    background-color: #fff;
+    line-height: 3.5rem;
+    .footer-left {
+        width:66.67%;
+        display: inline-block;
+        box-sizing: border-box;
+        font-size: 1rem;
+        padding-left: 1.14285714rem;
+        vertical-align: top;
+        border-top: 1px solid rgba(180, 186, 191, 0.5);
+    }
    }
 </style>

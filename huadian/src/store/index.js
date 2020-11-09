@@ -6,13 +6,17 @@ import * as modules from "./modules"
 import createPersistedState from "vuex-persistedstate"
 Vue.use(Vuex)
 const state = {
+  userArrar:new Array(),
+  loginKey:'',
   guideIndex:0,
-  purpoIndex:'',
+  purpoIndex:0,
   prowdIndex:'',
   occasionIndex:'',
   flowerIndex: '',
   categoryIndex:'',
   colorIndex:'',
+  navbarIndex:'',
+  addtoIndex:new Array(),
 }
 export default new Vuex.Store({
   state,

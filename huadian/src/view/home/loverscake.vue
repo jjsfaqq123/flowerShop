@@ -16,7 +16,7 @@
                 <div class="product-item-info-bottom">
                   <div class="product-item-info-bottom-left">
                     <p class="product-item-info-prices">
-                      <strong>{{cakes.cake_original}}</strong>
+                      <strong>￥{{cakes.cake_original.toFixed(2)}}</strong>
                       <s>{{cakes.cake_activity}}</s>
                     </p>
                     <p class="product-item-info-sales">{{cakes.cake_slod}}</p>

@@ -16,7 +16,7 @@
                 <div class="product-item-info-bottom">
                   <div class="product-item-info-bottom-left">
                     <p class="product-item-info-prices">
-                      <strong>{{chocolates.chocolate_original}}</strong>
+                      <strong>￥{{chocolates.chocolate_original.toFixed(2)}}</strong>
                       <s>{{chocolates.chocolate_activity}}</s>
                     </p>
                     <p class="product-item-info-sales">{{chocolates.chocolate_slod}}</p>
@@ -47,15 +47,18 @@
           </div>
         </div>
       </section> 
+    
     </div>
 </template>
 <script>
 import { homeChocclate,homeTeam } from "@/service/api";
+
 export default {
     data() {
       return {
         chocolate:null,
         what:null,
+       
       }
     },
     created() {
@@ -72,7 +75,7 @@ export default {
          let res = await homeTeam();
          this.what = res.data.homeWhat;
       }
-    }
+    },
 }
 </script>
 <style lang="less" scoped>

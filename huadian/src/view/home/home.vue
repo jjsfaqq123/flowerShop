@@ -6,7 +6,6 @@
       <headBox></headBox>
       <!-- <m-scroll> -->
       <!-- 主页主体一 -->
-      <div>
       <headHead ></headHead>
       <!-- 主页主体二 -->
       <headBody></headBody>
@@ -24,14 +23,10 @@
       <fonter></fonter>
       <!-- scrooll -->
       <headindicator></headindicator>
-</div>
        <!-- </m-scroll> -->
-       <tabbar></tabbar>  
       </div>
-
       <!-- 底部 -->
-      
-      
+       <tabbar></tabbar>  
     </div>
 </template>
 
@@ -47,13 +42,24 @@ import headchocolate from "@/view/home/loverschocolate";
 import headindicator from "@/view/home/loversindicator";
 import fonter from "@/components/fonter/fonter";
 import tabbar from "@/components/header/tabbar";
+import load from "@/components/common/gameLoading";
 
 export default {
   data() {
     return {
-
+     loading:false,
+     time:0,
+      Intervals:null
     }
   },
+  beforeRouteLeave(to,from,next) {
+
+    next()
+  },
+  beforeRouteEnter(to,from,next) {
+    next()
+  },
+   
   components:{
     headBox,
     headHead,
@@ -65,7 +71,7 @@ export default {
     headchocolate,
     fonter,
     headindicator,
-    tabbar
+    tabbar,
   }
 }
 </script>

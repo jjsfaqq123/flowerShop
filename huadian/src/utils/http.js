@@ -1,6 +1,6 @@
 import axios from "axios";
 import qs from "qs";
-import base4 from "base-64";
+import base64 from "base-64";
 import router from "../router"
 import CryptoJS from 'crypto-js'
 import Vue from 'vue'
@@ -23,7 +23,7 @@ axios.interceptors.response.use(response => {
       break;
     case 500: 
     //重定向
-    router.push('*')
+    router.push('/Natwork')
     break;
   }
   return Promise.reject(error);
@@ -32,6 +32,8 @@ axios.interceptors.response.use(response => {
 axios.defaults.timeout = 10000;
 //配置初始地址
 axios.defaults.baseURL=('http://127.0.0.1:5000/');
+//使用seesion配置项
+axios.defaults.withCredentials=true
 //get请求
 //封装请求
 
@@ -58,8 +60,9 @@ class Axios extends Vue {
       axios({
         method:"post",
         url,
+        header:{"Content-Type":"application/x-www-form-urlencoded"},
         data:(function(){
-          return base64.Base64.encode(JSON.String(param))
+          return qs.stringify(qs.parse({name:base64.encode(param.name),upwd:base64.encode(param.upwd)}))
         })(),
         cancelToken:new CancelToken(c => {
           cancel = c;

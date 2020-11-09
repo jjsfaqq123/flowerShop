@@ -18,7 +18,7 @@
               <div class="product-item-info-bottom">
                 <div class="product-item-info-bottom-left">
                   <p class="product-item-info-prices">
-                    <strong>￥{{elders.Elder_price}}</strong>
+                    <strong>￥{{elders.Elder_price.toFixed(2)}}</strong>
                     <s>{{elders.Elder_sell}}</s>
                   </p>
                   <p class="product-item-info-sales">{{elders.Elder_sest}}</p>

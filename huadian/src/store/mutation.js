@@ -5,6 +5,9 @@ export const setPurpo = (state,data) => {
   state.purpoIndex =data;
 }
 
+export const userIn = (state,data) => {
+  state.userArrar =data;
+}
 export const setProwd = (state,data) => {
   state.prowdIndex = data;
 }
@@ -24,3 +27,13 @@ export const setCategory = (state,data) => {
 export const setColor = (state,data) => {
   state.colorIndex = data;
 }
+//鲜花详情navbar
+export const setNavbar = (state,data) => {
+  state.navbarIndex = data;
+}
+
+//添加购物车
+export const setAddto = (state,data) => {
+  state.addtoIndex  = data
+}
+

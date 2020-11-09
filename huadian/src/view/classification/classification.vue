@@ -27,7 +27,7 @@
                     <div class="catebox-details-body">
                         <nav class="catebox-details-list">
                             <div class="catebox-details-item" v-for="(catebox,index) in itemBody.list2" :key="index">
-                            <router-link to="" class="navigation">
+                            <router-link to="/fresh" class="navigation">
                                 <img :src="catebox.imgss" alt="">
                                 <p class="catebox-details-item-desc">{{catebox.list_title}}</p>
                                 </router-link>

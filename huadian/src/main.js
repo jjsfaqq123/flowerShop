@@ -4,19 +4,23 @@ import router from './router'
 import store from './store'
 //引入vant
 import Vant from 'vant';
-import 'vant/lib/index.css';
+
 //引入全局组件
 import tabbar from "@/components/header/tabbar";
 Vue.component('tabbar',tabbar)
+//引入gameLoading
+import  Loading from "@/components/common/gameLoading";
+Vue.component('view-loading',Loading)
 import { 
   Lazyload,
 } from 'vant';
 
-Vue.use(Vant)
+Vue.use(Vant )
   //图片懒加载
   Vue.use(Lazyload,{
     lazyComponent: true
   })
+  import 'vant/lib/index.css';
 //引入iconfont图标
 import './assets/font/iconfont.css';
 //引入全局less
@@ -28,7 +32,8 @@ Vue.component('m-scroll',BScroller);
 //上拉加载下拉刷新
 import vuescroll from 'vuescroll';
 Vue.use(vuescroll)
-
+import VueScroller from 'vue-scroller'
+Vue.use(VueScroller)
 //全局vuescroll option配置
 Vue.prototype.options = {
   vuescroll:{

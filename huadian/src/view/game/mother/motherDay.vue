@@ -1,7 +1,7 @@
 <template>
   <div>
-    <headBox classif="classif" title="母亲节鲜花礼物" to="/"></headBox>
-    <section class="main animationLeft">
+    <headBox classif="classif" title="母亲节鲜花礼物" to="/" navation="motherDay"></headBox>
+    <section class="main ">
       <div class="banner">
         <img src="@/assets/img/homedetails/m_mother_banner.png" alt="">
         <img src="@/assets/img/homedetails/m_mother_letter.png" alt="">
@@ -10,6 +10,11 @@
         <ul class="procateav-box" :class="{'active':Active}">
           <li class="procateav-item"  v-for="(procats,index) in procat" :key="index" :class="procats.show ? 'tianactive' : ''">{{procats.title}}</li>
         </ul>
+       <!-- <van-tabs v-model="actives" scrollspy sticky  :class="{'active':Active}" title-active-color="red">
+          <van-tab v-for="(procats,index) in procat" :key="index"  :title="procats.title">
+        
+          </van-tab>
+      </van-tabs> -->
       </nav>
       <!-- 人气爆品 -->
       <div class="product" id="pic">
@@ -54,7 +59,7 @@
         </div>
       </div>
       <!-- 淡雅馨香 -->
-      <elegant></elegant>
+      <elegant ></elegant>
       <!-- 浪漫永生花-->
       <fragrant></fragrant>
         <div class="scroll" @click="scrollClick">
@@ -63,6 +68,8 @@
         </div>
       </div>
     </section>
+     <!-- 调用动画 -->
+    <view-loading v-show ='loading' ></view-loading>
   </div>
 </template>
 <script>
@@ -70,12 +77,14 @@ import headBox from "@/components/header/headBox";
 import { homeDetailsMother } from "@/service/api";
 import elegant from "@/view/game/mother/elegant";
 import fragrant from "@/view/game/mother/fragrant";
+import { setTimeout } from 'timers';
 export default {
   data() {
     return {
       Active:'',
       mother:null,
       normal:null,
+      loading:true,
       procat:[
         {title:"人气爆品" ,show:true},
         {title:"送老妈" ,show:false},
@@ -83,7 +92,7 @@ export default {
         {title:"永生花" ,show:false},
         {title:"精挑细选" ,show:false},
       ],
-     
+     actives:0,
     }
   },
   components: {
@@ -93,9 +102,14 @@ export default {
   },
   created() {
     this.getMother();
+    this.floor()
   },
-  mounted() {
-    window.onscroll =() => {
+  destroyed() {
+     window.removeEventListener('scroll', this.floor);
+  },
+  methods: {
+    floor() {
+      window.addEventListener('scroll',() => {
       let scollTop = document.documentElement.scrollTop || document.body.scrollTop;
       var scroll = document.querySelector('.scroll');
       if(scollTop>748) {
@@ -128,9 +142,8 @@ export default {
           this.procat[2].show = false;
         }
       }
-    }
-  },
-  methods: {
+    })
+    },
     scrollClick() {
        var top =document.documentElement.scrollTop||document.body.scrollTop;
        let timeTop = setInterval(() => {
@@ -142,6 +155,9 @@ export default {
     },
     async getMother() {
       let res = await homeDetailsMother();
+      setTimeout(() => {
+        this.loading = false;
+      },500)
       if(res.data.code === 1) {
         this.mother = res.data.homeDetailsMother[0];
         this.normal = res.data.homeDetailsMother[1];
@@ -149,7 +165,8 @@ export default {
         this.mother = res.data.msg;
         this.normal = res.data.msg;
       }
-    }
+    },
+    //点击切换
   }
 }
 </script>

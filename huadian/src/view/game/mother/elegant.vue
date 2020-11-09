@@ -21,14 +21,18 @@
             </router-link>
           </div>
     </div>
+     <!-- 调用动画 -->
+    <view-loading v-show ='loading' ></view-loading>
   </div>
 </template>
 <script>
 import { homeDetailsMother } from "@/service/api";
+import { setTimeout } from 'timers';
 export default {
   data() {
     return {
       elegant:null,
+      loading:true,
     }
   },
   created() {
@@ -38,6 +42,9 @@ export default {
   methods: {
     async getElegant() {
       let res = await homeDetailsMother();
+      setTimeout(() => {
+        this.loading = false;
+      },500)
         if(res.data.code === 1) {
           this.elegant = res.data.homeDetailsMother[2];
         }else {

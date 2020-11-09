@@ -1,4 +1,12 @@
+
+
 import http from "../utils/http";
+//用户登录
+export const login = param =>
+http.post('api/user/login',param) 
+// //用户信息
+export const userInfo = param => 
+http.get('api/user/userInfo') 
 //首页蛋糕推荐
 export const homeUser =param => 
   http.get('api/home/cake');
@@ -37,4 +45,26 @@ http.get('api/homeDetails/mother');
 
 //首页鲜花详情
 export const homeDetailsFlower = param =>
-http.get('api/homeDetails/flower');
+http.get('api/homeDetails/flower',param);
+
+//首页鲜花详情-之送女友
+export const homeDetailsGive = param =>
+http.get('api/homeDetails/flowerGive',param);
+
+//首页鲜花详情-之送男友
+export const homeDetailsBoyfrienf = param =>
+http.get('api/homeDetails/flowerBoyfrienf',param);
+
+//首页鲜花详情-之送朋友
+export const homeDetailsfriend = param =>
+http.get('api/homeDetails/flowerfriend',param);
+
+//首页鲜花详情-之送朋友
+export const homeDetailsolder = param =>
+http.get('api/homeDetails/flowerolder',param);
+
+//首页鲜花详情-之销量送女友
+export const homeDetailsalesGirlfriend = param =>
+http.get('api/homeDetails/flowersalesgflfriend',param);
+
+

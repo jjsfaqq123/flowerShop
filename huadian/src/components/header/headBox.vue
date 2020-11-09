@@ -2,7 +2,7 @@
   <div>
     <header class="headerbar">
       <div class="headerbar-left">
-        <router-link :to='to' class="navigation" >
+        <router-link :to='to' class="navigation" @click.native='goBack'>
           <i class="iconfont icon-left"></i>
         </router-link>
       </div>
@@ -10,13 +10,12 @@
         <p class="headerbar-content" >{{title}}</p>
       </div>
       <div class="headerbar-right" v-show="classif">
-        <div class="navigation">
+        <div class="navigation" v-show="navation">
           <i class="iconfont icon-sevice"></i>
         </div>
         <div class="navigation headerbar-menu-toggle">
           <i class="iconfont icon-icon-test1" @click="iconFenlei" ></i>
           <nav class="headerbar-menu" :class="{'actives':Actives}">
-            
             <div class="headerbar-menu-item" v-for="(ifcations,index) in ifcation" :key='index'>
               <router-link :to="ifcations.path" class="navigation" :class="{active:guideIndex==index}" @click.native="setGuidIndex(index)" >
                 <i :class="ifcations.ifcation_icon"></i>
@@ -56,6 +55,9 @@ export default {
          this.Actives=''
        },200)
      }
+    },
+    goBack() {
+      
     }
   },
   props: {
@@ -66,8 +68,11 @@ export default {
       type:String,
     },
     classif:{
-      type:String
+      type:String,
     },
+    navation: {
+      type:String,
+    }
   }
 }
 </script>

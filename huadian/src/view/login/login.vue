@@ -1,14 +1,14 @@
 <template>
-  <div class="animationLeft">
+  <div >
     <headBox title="登录注册" to="mine"  classif='classif'></headBox>
     <div class="hualogo ">
       <img src="@/assets/img/mine/wx_login_logo.png" alt="">
     </div>
     <div class="login " >
       <div class="login-item" v-if="Login==0">
-        <div class="login-item-title" >手机号</div>
+        <div class="login-item-title" >用户名</div>
         <div class="login-item-info">
-          <input type="text" placeholder="请输入手机号" v-model="phone" minlength="11" maxlength="11">
+          <input type="text" placeholder="请输入用户名" v-model="phone" minlength="5" maxlength="5">
           <div class="login-item-info-icon">
             <i class="iconfont icon-shanchu" @click="empty"></i>
         </div>
@@ -16,38 +16,44 @@
       </div>
       <!-- 手机号短信登录 -->
       <div class="login-item" v-if="Login==1">
-        <div class="login-item-title" >手机号/邮箱</div>
+        <div class="login-item-title" >用户名</div>
         <div class="login-item-info">
-          <input type="text" placeholder="请输入手机号或邮箱" v-model="phoneEmail">
+          <input type="text" placeholder="请输入用户名" v-model="phoneEmail">
           <div class="login-item-info-icon">
             <i class="iconfont icon-shanchu" @click="empty"></i>
         </div>
         </div>
       </div>
-
       <div class="login-item" v-if="Login==0" >
-        <div class="login-item-title">验证码</div>
+        <div class="login-item-title">密码</div>
         <div class="login-item-info">
-          <input type="text" placeholder="请输入验证码" maxlength="4" v-model="captcha">
-          <div class="login-item-info-btn" >{{obtain}}</div>
+          <input type="text" placeholder="请输入密码 " maxlength="6" v-model="captcha">
         </div>
       </div>
+        <div class="login-item-info" v-if="Login==0" style="margin-top:20px;justify-content: space-between;">
+          <div >{{obtain}}</div>
+          <div>
+              <van-switch v-model="checked" />
+              <span style="position: absolute;top:323px;right:95px">记住用户密码</span>
+          </div>
+         
+        </div>
       <!-- 密码 -->
       <div class="login-item" v-if="Login==1">
         <div class="login-item-title">密码</div>
         <div class="login-item-info">
-          <input type="text" placeholder="请输入验证码" maxlength="4" v-model="password" >
+          <input type="text" placeholder="请输入密码" maxlength="4" v-model="password" >
           <div class="login-item-info-icon">
             <i class="iconfont icon-yey2-copy"></i>
           </div>
           <div class="login-item-info-icon">
             <i class="iconfont icon-zhengyan"></i>
           </div>
-          <div class="login-item-info-btn">忘记密码</div>
+          <!-- <div class="login-item-info-btn">忘记密码</div> -->
         </div>
       </div>
       <!-- <van-button type="warning" size="large">大号按钮</van-button> -->
-      <button class="to-login" @click="login" >{{cellPhone}}</button>
+      <button class="to-login" @click="userLogin" >{{cellPhone}}</button>
       <div class="login-by-password" @click="account">{{accountSms}}</div>
     </div>
     <div class="quick">
@@ -63,18 +69,20 @@
 </template>
 <script>
 import headBox from "@/components/header/headBox"
-
+import  { login } from '@/service/api';
+import base64 from "base-64";
 export default {
   data() {
     return {
       Login:0,
       accountSms:'账号密码登录',
-      cellPhone:'手机登录/注册',
+      cellPhone:'登录 ',
       phone:'',
       captcha:'',
-      obtain:'获取验证码',
+      obtain:'忘记密码',
       phoneEmail:'',
       password:'',
+      checked:false,
       other: [
         {other_icon:"iconfont icon-qq",other_text:'QQ'},
         {other_icon:"iconfont icon-zhifubao",other_text:'支付宝'},
@@ -82,39 +90,28 @@ export default {
       ]
     }
   },
-  watch: {
-    phone(){
-      var login_item = document.querySelector('.login-item-info-btn');
-      var iconfonts = document.querySelector('.login-item-info-icon')
-      if(this.phone) {
-        login_item.style.color="#f00"
-        iconfonts.style.display = 'block'
-      }else {
-        login_item.style.color=""
-        iconfonts.style.display = 'none'
-      }
-    },
-    phoneEmail(){
-      var login_it = document.querySelector('.login-item-info-btn');
-      var iconf = document.querySelector('.login-item-info-icon')
-      if(this.phoneEmail) {
-        login_it.style.color="#f00"
-        iconf.style.display = 'block'
-      }else {
-        login_it.style.color=""
-        iconf.style.display = 'none'
-      }
-    }
-  },
+  // watch: {
+  //   phone(){
+  //     var login_item = document.querySelector('.login-item-info-btn');
+  //     var iconfonts = document.querySelector('.login-item-info-icon')
+  //     if(this.phone) {
+  //       login_item.style.color="#f00"
+  //       iconfonts.style.display = 'block'
+  //     }else {
+  //       login_item.style.color=""
+  //       iconfonts.style.display = 'none'
+  //     }
+  //   }
+  // },
   methods: {
     account() {
      if(!this.Login) {
-      this.accountSms = '手机短信登录'
+      this.accountSms = '用户名密码注册'
       this.cellPhone = '登录'
       this.Login = 1;
      }else if(this.Login) {
        this.accountSms = '账号密码登录'
-      this.cellPhone = '手机登录/注册'
+      this.cellPhone = '登录'
        this.Login = 0
      }
   },
@@ -127,13 +124,13 @@ export default {
     }
   },
     //手机登录注册
-    login() {
-      var phoneReg = /^1[345789]\d{9}$/;   //手机号正则格式
+  async  userLogin() {
+      var phoneReg = /^[a-z]{1,30}$/;   
       var emailReg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;//邮箱
       //验证手机号是否为空
       if(!this.phone &&this.Login==0 ) {
         this.$toast({
-          message:"手机号不能为空",
+          message:"用户名不能为空",
           position:'bottom'
       })
       return false;
@@ -141,7 +138,7 @@ export default {
     //验证手机号长度
     if( this.Login===0 && !phoneReg.test(this.phone)) {
       this.$toast({
-          message:"手机号格式错误",
+          message:"用户名只能纯小写不能有汉字或者中文",
           position:'bottom'
         });
         return false;
@@ -149,31 +146,7 @@ export default {
       //验证验证码
       if(!this.captcha &&this.Login===0) {
         this.$toast({
-          message:"验证码不能为空",
-          position:"bottom"
-        })
-        return false;
-      };
-      //验证验证码长度
-      if(this.captcha.length<4 &&this.Login===0) {
-         this.$toast({
-          message:"验证码最少4位",
-          position:"bottom"
-        })
-        return false;
-      }
-      //验证手机邮箱
-      if(!this.phoneEmail && this.Login === 1) {
-        this.$toast({
-          message:"账号不能为空",
-          position:"bottom"
-        })
-        return false;
-      };
-      //验证邮箱和手机格式是否正确
-      if(!emailReg.test(this.phoneEmail) && !phoneReg.test(this.phoneEmail)  && this.Login === 1) {
-        this.$toast({
-          message:"邮箱或手机号格式不对",
+          message:"密码不能为空",
           position:"bottom"
         })
         return false;
@@ -186,14 +159,20 @@ export default {
         })
         return false;
       };
-      //验证密码长度
-      if(this.password<4 && this.Login === 1) {
-        this.$toast({
-          message:"密码最少4位",
-          position:"bottom"
-        })
-        return false;
-      };
+     //获取用户名
+     var params = {
+       name:this.phone,
+       upwd:this.captcha
+     }
+    var res = await login(params);
+     if(res.data.code == 1) {
+       this.$toast(res.data.msg)
+       this.$router.push('/')
+       sessionStorage.setItem("loginKey",base64.encode(res.data.loginKey))
+       this.$store.state.loginKey = res.data.loginKey
+     }else {
+        this.$toast(res.data.msg)
+     }
     }
   },
   components:{

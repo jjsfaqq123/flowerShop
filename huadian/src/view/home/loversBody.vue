@@ -12,19 +12,19 @@
               <p class="product-item-info-name text-overflow">{{flowerss.flowers_always}}</p>
               <p class="product-item-info-desc text-overflow-line2 ">{{flowerss.flowers_boutique}}</p>
               <div class="product-item-info-tags">
-                <span class="tag-promo">{{flowerss.flowers_sest}}</span>
+                <span class="tag-promo" v-if="flowerss.flowers_sest!==null">{{flowerss.flowers_sest}}</span>
               </div>
               <div class="product-item-info-promo">{{flowerss.flowers_classic}}</div>
               <div class="product-item-info-bottom">
                 <div class="product-item-info-bottom-left">
                   <p class="product-item-info-prices">
-                    <strong>￥{{flowerss.flowers_blodprice}}</strong>
+                    <strong>￥{{flowerss.flowers_blodprice.toFixed(2)}}</strong>
                     <s>{{flowerss.flowers_price}}</s>
                   </p>
                   <p class="product-item-info-sales">{{flowerss.flowers_sell}}</p>
                 </div>
                 <div class="product-item-info-bottom-right">
-                  <i class="iconfont icon-gouwuche"></i>
+                  <i class="iconfont icon-gouwuche"  @click='addto(flowerss,index)'></i>
                 </div>
               </div>
             </div>
@@ -39,16 +39,19 @@
 </template>
 <script>
 import  { homeLovers } from '@/service/api';
+import { mapMutations, mapState } from 'vuex';
 export default {
   data() {
     return {
       flowers:null,
+      datas:[],
     }
   },
   created() {
     this.flower()
   },
   methods: {
+    ...mapMutations(['setAddto','setGuidIndex']),
    async flower() {
      let res = await homeLovers() 
         if(res.data.code === 1) {
@@ -56,6 +59,11 @@ export default {
         }else {
           this.flowers = res.data.msg;
         }
+    },
+    //点击添加购物车
+    addto(flowerss,index) {
+       this.datas.push(flowerss)
+       this.setAddto(this.datas)
     }
   }
 }

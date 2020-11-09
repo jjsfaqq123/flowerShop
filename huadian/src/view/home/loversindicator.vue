@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="scroll" @click="scrollClick">
+    <div class="scroll" @click="scrollClick" :style="scrollStaus==1?'display:block':'display:none'">
       <div class="scroll-item">
         <router-link to="#" class="iconfont icon-xiangshangjiantou-copy" id="backTop"></router-link>
       </div>
@@ -11,30 +11,27 @@
 export default {
     data() {
       return {
-        as:""
+        scrollStaus:0
       }
     },
-    mounted() {
-      window.addEventListener('scroll',this.getaddEvent,true);
+    created() {
+     this.getaddEvent()
     },
     destroyed() {
-      window.removeEventListener('scroll', this.getaddEvent,true);
-      
+      window.removeEventListener('scroll', this.getaddEvent);
     },
     methods: {
       getaddEvent() {
-         window.onscroll=function() {
+         window.addEventListener('scroll',()=>{
         //获得目前滚动的距离
         var scrollTop =document.documentElement.scrollTop||document.body.scrollTop;
-        // console.log(scrollTop)
         //找到要显示试图
-        var scroll = document.querySelector('.scroll');
         if(scrollTop>770) {
-          scroll.style.display="block";
+          this.scrollStaus = 1;
         }else {
-           scroll.style.display="none";
+            this.scrollStaus = 0;
         }
-      }
+      })
     },
       scrollClick() {
          var top =document.documentElement.scrollTop||document.body.scrollTop;

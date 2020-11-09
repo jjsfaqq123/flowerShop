@@ -82,10 +82,13 @@
         </div>
       </div>
     </section>
+    <!-- 调用动画 -->
+    <view-loading v-show ='loading' ></view-loading>
   </div>
 </template>
 <script>
 import { homeBarthday } from "@/service/api";
+import { setTimeout } from 'timers';
 export default {
   data() {
     return {
@@ -94,6 +97,7 @@ export default {
       lovers:null,
       fres:null,
       fonts:null,
+      loading:true,
       proca:[
         { procat_path:'/fresh',procat_img:require('@/assets/img/body/m_home_category_flower.png'),procat_title:'鲜花'},
         { procat_path:'/eternal',procat_img:require('@/assets/img/body/m_home_category_ppf.png'),procat_title:'永生花'},
@@ -110,6 +114,9 @@ export default {
       async procatBarthday() {
         //判断返回数据是否返回
         let res = await homeBarthday();
+        setTimeout(() => {
+          this.loading =false;
+        },500)
         if(res.data.code === 1) {
           this.scenc = res.data.barthday[0];
           this.lovers = res.data.barthday[1];
@@ -124,13 +131,13 @@ export default {
            this.fonts = res.data.msg;
         }
     }
-  }
+  },
 };
 </script>
 
 <style lang="less" scoped>
  .van-swipe {
-  height: 200px;
+  height: 24vh;
 }
 .van-swipe__indicator--active {
   background: #ff734c;
@@ -150,11 +157,12 @@ export default {
 }
 .conpay-info {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   height: 2.57142857rem;
   overflow: hidden;
   background: #fff;
+  box-sizing: border-box;
   .conpay-info-item {
     width: auto;
     height: 2.57142857rem;
@@ -164,18 +172,16 @@ export default {
   }
 }
 .conpay-info>.conpay-info-item::before {
-    content: "\e652";
+    content: "\e660";
     font-family: "iconfont" !important;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     font-style: normal;
     color: #435448;
     vertical-align: bottom;
-    display: inline-block;
-    width: 26px;
+    
+  
 }
-.conpay-info>.conpay-info-item+.conpay-info-item{
-  margin-left: 0.85714286rem;
-}
+
 .procate {
     display: flex;
     background: #fff;

@@ -1,7 +1,15 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import {  Dialog ,Toast} from "vant";
+import { mode } from "crypto-js";
 
 Vue.use(VueRouter);
+//登录
+const login = (resolve) => {
+  import("@/view/login/login").then((module) => {
+    resolve(module);
+  });
+};
 //首页  路由懒加载
 const home = (resolve) => {
   import("@/view/home/home").then((module) => {
@@ -29,12 +37,6 @@ const mine = (resolve) => {
   });
 };
 
-//登录
-const login = (resolve) => {
-  import("@/view/login/login").then((module) => {
-    resolve(module);
-  });
-};
 
 //首页轮播图详情
 const motherDay = (resolve) => {
@@ -84,12 +86,35 @@ const chocolate = (resolve) => {
     resolve(module)
   })
 }
+
+//错误页面
+const Natwork = (resolve) => {
+  import("@/components/common/NetworkDrop").then((module) => {
+    resolve(module)
+  })
+}
+//客服
+const customer = (resolve) => {
+  import('@/view/mine/mineMenu/CustomerService').then((module) => {
+    resolve(module)
+  })
+}
+//购物车总价
+const cartShow = (resolve) => {
+  import('@/view/cart/cartShow').then((module) => {
+    resolve(module)
+  })
+}
 const router = new VueRouter({
+  mode:"history",
   routes: [
     {
       path: "/",
       name: " home",
       component: home,
+      meta: { 
+        keepAlive:true
+      }
     },
     {
       path: "/classification",
@@ -146,7 +171,38 @@ const router = new VueRouter({
       name:'chocolate',
       component:chocolate
     },
+    {
+      path:"/Natwork",
+      name:"Natwork",
+      component:Natwork,
+    },
+    {
+      path:"/customer",
+      name:"customer",
+      component:customer,
+    },
+    {
+      path:"/cartShow",
+      name:"cartShow",
+      component:cartShow,
+    }
   ],
 });
+
+router.beforeEach((to, from, next) => {
+  var storage=sessionStorage.getItem('loginKey');
+  const Routerpath = ['/Natwork','/','/login']
+  if(Routerpath.indexOf(to.path) > -1||storage) {
+    next();
+  }else {
+    Dialog.alert({
+       title:"系统提示",
+       message:'你未登录 '
+     }).then(() => {
+       next('/login')
+     })
+     
+  }
+})
 
 export default router;

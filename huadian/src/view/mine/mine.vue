@@ -4,11 +4,14 @@
     <m-scroll>
       <section class="main  ssw animationLeft">
         <div class="userinformation">
-          <div class="userinformation-notlogin">
-            <p class="userinformation-notlogin-hi">Hi,欢迎来到花礼网</p>
+          <div class="userinformation-notlogin" v-if="this.loginKey">
+            <p class="userinformation-notlogin-hi">昵称：{{userInfo.uname}}</p>
             <p class="userinformation-notlogin-gologin">
-              <router-link to="/login">登录/注册</router-link>
+              <img :src="'http://127.0.0.1:5000'+userInfo.img" alt="">
             </p>
+          </div>
+          <div class="btns">
+             <van-button type="default" size="small" @click="quit">退出登录</van-button>
           </div>
         </div>
         <!-- order -->
@@ -58,7 +61,7 @@
           <div class="panel-body">
             <div class="linkbox">
               <div class="linkbox-item" v-for="(contacts,index) in contact" :key="index">
-                <router-link to="" class="navigation">
+                <router-link :to="contacts.path" class="navigation">
                   <i :class="contacts.contact_icon"></i>
                   <p class="linkbox-item-txt">{{contacts.contact_text}}</p>
                 </router-link>
@@ -72,7 +75,9 @@
   </div>
 </template>
 <script>
-import headBox from "@/components/header/headBox"
+import headBox from "@/components/header/headBox";
+import { mapState } from "vuex";
+import {  Dialog ,Toast} from "vant";
 export default {
     data() {
       return {
@@ -94,16 +99,38 @@ export default {
           {receipt_icon:'iconfont icon-naozhong',receipt_text:'浏览记录'},
         ],
         contact: [
-          {contact_icon:'iconfont icon-sevice',contact_text:"联系客服"},
-          {contact_icon:'iconfont icon-bangzhu666',contact_text:"帮助中心"},
-          {contact_icon:'iconfont icon-guanyu',contact_text:"关于花礼"},
-          {contact_icon:'iconfont icon-shezhi',contact_text:"设置"},
-        ]
+          {contact_icon:'iconfont icon-sevice',contact_text:"联系客服",path:"/customer"},
+          {contact_icon:'iconfont icon-bangzhu666',contact_text:"帮助中心",path:"/customer"},
+          {contact_icon:'iconfont icon-guanyu',contact_text:"关于花礼",path:"/customer"},
+          {contact_icon:'iconfont icon-shezhi',contact_text:"设置",path:"/customer"},
+        ],
+        userInfo:{},
       }
     },
     components:{
       headBox
-    }
+    },
+    mounted() {
+      if(this.loginKey) {
+        this.userInfo = this.userArrar[0];
+      }
+    },
+    methods: {
+      quit() {
+          Dialog.confirm({
+          title:"系统提示",
+          message:'你确定要退出吗?'
+        }).then(() => {
+          sessionStorage.clear()
+          this.$router.push('/')
+        }).catch((err) => {
+          console.log(err)
+        })
+      } 
+    },
+     computed: {
+      ...mapState(['userArrar','loginKey'])
+  },
 }
 </script>
 <style lang="less" scoped>
@@ -133,14 +160,19 @@ export default {
   .userinformation-notlogin-gologin {
     margin-top: 0.57142857rem;
     text-align: center;
-    a {
-      display: block;
-      width: 9rem;
-      height: 2.57142857rem;
-      line-height: 2.57142857rem;
-      background-color: #fff;
-      border-radius: 4rem;
-      font-weight: 500;
+    // a {
+    //   display: block;
+    //   width: 9rem;
+    //   height: 2.57142857rem;
+    //   line-height: 2.57142857rem;
+    //   background-color: #fff;
+    //   border-radius: 4rem;
+    //   font-weight: 500;
+    // }
+    img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
     }
   }
   .panel {
@@ -252,5 +284,14 @@ export default {
     right: 1.14285714rem;
     top: 0;
     border-top: 1px solid #E9ECF0;
+}
+.btns {
+  position: absolute;
+  top:15px;
+  right: 11px;
+}
+.colors {
+  color:red;
+  
 }
 </style>

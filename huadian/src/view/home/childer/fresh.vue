@@ -1,9 +1,9 @@
 <template>
   <div style="background: #E9ECF0;">
-    <headBox to='/' title='鲜花' classif=‘classif ></headBox>
+    <headBox to='/' :title='subtitle' classif='classif'></headBox>
     <nav class="filter">
-      <div class="filter-item" v-for="(fils,index) in fil" :key="index">
-        <router-link to="" class="navigation" @click.native="filClick(index)" :class="Active===index?'active':''">{{fils.fil_title}}
+      <div class="filter-item" v-for ="(fils,index) in fil" :key="index">
+        <router-link to="" class="navigation" @click.native="filClick(index)"  :class="Active===index?'active':''">{{fils.fil_title}}
           <i class="filter-item-price"></i>
         </router-link>
       </div>
@@ -11,8 +11,8 @@
     <!-- purpose -->
     <nav class="purpose">
       <div class="purpose-list">
-        <div class="purpose-item" v-for="(purpos,index) in purpo" :key="index" :class="purpoIndex===index&&purpos.purpo_show?'actives':''">
-          <router-link to="" class="navigation"  @click.native="purs(index)">
+      <div class="purpose-item" v-for="(purpos,index) in purpo" :key="index" :class="{'actives':purpoIndex==index&&purpos.purpo_show===true}">
+          <router-link to="" class="navigation"  @click.native="purs(index,purpos)">
             {{purpos.purpo_title}}
             <i class="iconfont icon-triangle-down" v-if="index==4"></i>
             </router-link>
@@ -26,9 +26,8 @@
          ref="vs"
          style="position:initial"
          @refresh-before-deactivate="handleRBD"
-         @load-start="handleLoadStart"
-         
-         
+      
+         @load-before-deactivate="handleLBD"
          >
       <div class="product-list product-list-vertical">
         
@@ -39,18 +38,17 @@
             </div>
             <div class="product-item-info">
               <div class="product-item-info-tags">
-                <span>{{flows.homeDetails_title}}</span>
+                <span v-if='flows.homeDetails_title!==null'>{{flows.homeDetails_title}}</span>
               </div>
               <p class="product-item-info-name  text-overflow">
                 {{flows.homeDetails_titles}}
               </p>
               <div class="product-item-info-bottom">
-                <strong>￥{{flows.homeDetails_price.toFixed(2)}}</strong>
+                <strong>￥{{flows.homeDetails_price}}</strong>
               </div>
             </div>
           </router-link>
         </div>
-       
       </div>
        </vue-scroll>
       
@@ -94,17 +92,50 @@
         <router-link to="/fresh" @click.native='submit'>清除选择</router-link>
       </div>
       </van-popup>
+     <!-- 调用动画 -->
+    <view-loading v-show ='loading' ></view-loading>
   </div>
 </template>
 <script>
 import headBox from "@/components/header/headBox";
+import headindicator from "@/view/home/loversindicator";
 import { mapMutations, mapState } from 'vuex';
-import { homeDetailsFlower } from "@/service/api"
+import { 
+  homeDetailsFlower,homeDetailsGive,
+  homeDetailsBoyfrienf,homeDetailsfriend,
+  homeDetailsolder,homeDetailsalesGirlfriend } from "@/service/api"
+import { setTimeout } from 'timers';
 export default {
   data() {
     return {
+      loading:true,
       show:false,
       triggerType:'load',
+      noData:false,
+      params:{
+        pageIndex:1,
+        pageSize:10
+      },
+      paramsGive: {
+        pageIndex:1,
+        pageSize:10
+      },
+      paramsBoyfrienf: {
+        pageIndex:1,
+        pageSize:10
+      },
+      paramsfriend: {
+        pageIndex:1,
+        pageSize:10
+      },
+      paramsolder: {
+        pageIndex:1,
+        pageSize:10
+      },
+      paramsGirlfriend: {
+         pageIndex:1,
+        pageSize:10
+      },
       fil: [
         {fil_title:'综合'},
         {fil_title:'销量'},
@@ -163,33 +194,76 @@ export default {
         {flowerColor_title:'篮色'},
       ],
       Active:0,
-      flow:null,
+      flow:[],
+      subtitle:'鲜花'
     }
   },
-  created() {
+  mounted() {
     this.getFlower();
   },
   methods:{
-    
-    ...mapMutations(['setPurpo','setProwd','setOccasion','setFlower','setCategory','setColor']),
+    ...mapMutations(['setPurpo','setProwd','setOccasion','setFlower','setCategory','setColor','setNavbar']),
     //请求数据
     async getFlower() {
-      let res = await homeDetailsFlower();
+      let res = await homeDetailsFlower(this.params);
+      setTimeout(() => {
+        this.loading = false;
+      },500)
       if(res.data.code === 1) {
           this.flow = res.data.flowerDetails;
       }else {
         this.flow = res.data.msg;
       }
     },
-    filClick(index) {
+    async filClick(index) {
+      this.setNavbar(index)
       this.Active = index;
+      if(index === 1 && this.purpoIndex === 0) {
+        let res = await homeDetailsalesGirlfriend(this.paramsGirlfriend)
+        if(res.data.code === 1) {
+          this.flow = res.data.flfriend;
+        }else {
+          this.flow = res.data.msg;
+        }
+      }
     },
-    purs(index) {
+    async purs(index,purpos) {
+      this.subtitle = purpos.purpo_title
       this.setPurpo(index);
+      if(this.purpoIndex === 0) {
+         let res = await homeDetailsGive(this.paramsGive);
+         if(res.data.code === 1) {
+          this.flow = res.data.flowerDetailsGive;
+          }else {
+            this.flow = res.data.msg;
+          }
+        }else if(this.purpoIndex === 1) {
+          let res = await homeDetailsBoyfrienf(this.paramsBoyfrienf);
+          if(res.data.code === 1) {
+            this.flow = res.data.flowerDetailsBoyfrienf;
+          }else {
+            this.flow = res.data.msg;
+          }
+        }else if(this.purpoIndex === 2) {
+          let res = await homeDetailsfriend(this.paramsfriend);
+          if(res.data.code === 1) {
+            this.flow = res.data.flowerDetailsFriend;
+          }else {
+            this.flow = res.data.msg;
+          }
+        }else if(this.purpoIndex === 3) {
+          let res = await homeDetailsolder(this.paramsolder);
+          if(res.data.code === 1) {
+            this.flow = res.data.flowerDetailsDlder
+          }else {
+            this.flow = res.data.msg;
+          }
+        }
       //判断下标是否未4
-      if(index == 4 ) {
+      if(index == 4 &&purpos.purpo_show === false) {
         //显示右侧遮罩层
         this.show = true;
+        
       }
     },
     //人群
@@ -220,20 +294,88 @@ export default {
       //隐藏加载动画
       this.$refs["vs"].triggerRefreshOrLoad(this.triggerType);
     },
-    handleLoadStart(vm, dom, done) {
-      
+   async handleLBD(vm, loadDom, done) {
+     console.log(vm, loadDom, done)
+     if(this.purpoIndex === -1) {
+     this.params.pageIndex++;
+     //上拉加载鲜花数据
+      let res = await homeDetailsFlower(this.params);
+      if(res.data.code === 1) {
+        this.flow =this.flow.concat(res.data.flowerDetails); 
+      }else {
+        this.flow = this.flow
+      }
+     }
+      //判断上拉下标
+      if(this.purpoIndex === 0) {
+        this.paramsGive.pageIndex++;
+        done()
+        let res = await homeDetailsGive(this.paramsGive);
+        console.log(res)
+          if(res.data.code === 1) {
+            this.flow =this.flow.concat(res.data.flowerDetailsGive); 
+          }else {
+            this.flow = res.data.msg;
+            console.log(this.flow)
+          }
+           
+      }else if(this.purpoIndex === 1) {
+        this.paramsBoyfrienf.pageIndex++;
+        let res = await homeDetailsBoyfrienf(this.paramsBoyfrienf);
+          if(res.data.code === 1) {
+            this.flow =this.flow.concat(res.data.flowerDetailsBoyfrienf); 
+          }else {
+            this.flow = res.data.msg;
+          }
+      }else if(this.purpoIndex === 2) {
+        this.paramsfriend.pageIndex++;
+          let res = await homeDetailsfriend(this.paramsfriend);
+          if(res.data.code === 1) {
+            this.flow =this.flow.concat(res.data.flowerDetailsFriend); 
+          }else {
+            this.flow = res.data.msg;
+          }
+      }else if(this.purpoIndex === 3) {
+        this.paramsolder.pageIndex++;
+         let res = await homeDetailsolder(this.paramsolder);
+          if(res.data.code === 1) {
+            this.flow =this.flow.concat(res.data.flowerDetailsDlder); 
+          }else {
+            this.flow = res.data.msg;
+          }
+      }else if(this.navbarIndex === 1 && this.purpoIndex === 0) {
+        this.paramsGirlfriend.pageIndex++;
+        let res = await homeDetailsalesGirlfriend(this.paramsGirlfriend);
+        console.log(res)
+        if(res.data.code === 1) {
+            this.flow =this.flow.concat(res.data.flfriend); 
+          }else {
+            this.flow = res.data.msg;
+          }
+      }
+      setTimeout(() => {
+        const random = Math.floor(Math.random() * 2) + 1;
+        if (random == 1) {
+          this.noData = true;
+        } else {
+          this.noData = false;
+        }
+        done();
+      }, 600);
     },
-    handleRBD(vm, loadDom, done) {
+    //下拉刷新
+    async handleRBD(vm, loadDom, done) {
       setTimeout(() => {
         done();
       }, 500);
     },
   },
   components: {
-    headBox
+    headBox,
+    headindicator
   },
   computed:{
-    ...mapState(['purpoIndex','prowdIndex','occasionIndex','flowerIndex','categoryIndex','colorIndex'])
+    ...mapState(['purpoIndex','prowdIndex','occasionIndex','flowerIndex','categoryIndex','colorIndex','navbarIndex'])
   }
 }
 </script>
@@ -328,5 +470,4 @@ export default {
     text-align: center;
     background-color: #E9ECF0;
   }
-
 </style>

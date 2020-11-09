@@ -6,6 +6,48 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "339858",
+      "name": "iconfont-delete",
+      "font_class": "iconfontdelete",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "1072114",
+      "name": "减号",
+      "font_class": "jianhao",
+      "unicode": "e6ef",
+      "unicode_decimal": 59119
+    },
+    {
+      "icon_id": "1146280",
+      "name": "iconfont_add",
+      "font_class": "icon10",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "375659",
+      "name": "checkbox",
+      "font_class": "gouxuan",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "13276998",
+      "name": "checkbox",
+      "font_class": "checkbox",
+      "unicode": "e736",
+      "unicode_decimal": 59190
+    },
+    {
+      "icon_id": "248921",
+      "name": "select_fill",
+      "font_class": "selectfill",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    },
+    {
       "icon_id": "243458",
       "name": "iconfont-triangle-down",
       "font_class": "triangle-down",
@@ -214,13 +256,6 @@
       "font_class": "gouwuche",
       "unicode": "e6da",
       "unicode_decimal": 59098
-    },
-    {
-      "icon_id": "8777390",
-      "name": "check_filled",
-      "font_class": "icon-test",
-      "unicode": "e652",
-      "unicode_decimal": 58962
     },
     {
       "icon_id": "2920393",

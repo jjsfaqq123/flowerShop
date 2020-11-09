@@ -5,9 +5,12 @@
         v-for="(tabbars,index) in tabbar" :key="index"
         :to='tabbars.tabbar_url' 
         :class="{active:guideIndex==index}"
-        @click.native="setGuidIndex(index)"
+        @click.native="setTo(index)"
+        
         class="navigation" >
-          <i :class="tabbars.tabbar_icon"></i>
+          <i :class="tabbars.tabbar_icon" class="posting">
+            <p v-if="index == 2" v-for="(items,indexs) in addtoIndex" :key="indexs">{{items.id}}</p>
+          </i>
           <p>{{tabbars.tabbar_title}}</p>
         </router-link>
       </div>
@@ -20,6 +23,8 @@ import {mapMutations, mapState} from "vuex"
 export default {
   data() {
     return {
+      as:'',
+      addIndex:'',
       tabbar: [
         {tabbar_url:'/',tabbar_icon:"iconfont icon-shouye",tabbar_title:'首页', },
         {tabbar_url:'/classification',tabbar_icon:'iconfont icon-fenlei',tabbar_title:'分类'},
@@ -28,11 +33,15 @@ export default {
       ],
     }
   },
+  
   computed: {
-    ...mapState(['guideIndex'])
+    ...mapState(['guideIndex','addtoIndex'])
   },
   methods:{
     ...mapMutations(["setGuidIndex"]),
+    setTo(index) {
+      this.setGuidIndex(index)
+    }
   },
 }
 </script>
@@ -41,12 +50,13 @@ export default {
     position: fixed;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: -1px;
     z-index: 9;
     align-items: center;
     overflow: hidden;
     background: #F7F9FA;
     width:100%;
+    max-width: 653px;
 }
 
 .tabbar-item {
@@ -55,10 +65,27 @@ export default {
   display: flex;
   .navigation {
     height: 3.5rem;
-    padding-top: 0.88571429rem;
+    padding-top: 0.4rem;
     box-sizing: border-box;
     display: block;
     flex: 1;
+  }
+}
+.posting {
+  position: relative;
+  p {
+    position: absolute;
+    top: -3px;
+    left: 96%;
+    min-width: 0.71428571rem;
+    line-height: 1;
+    padding: 0 0.14285714rem;
+    font-size: 0.71428571rem;
+    color: #fff;
+    background: #FF734C;
+    border-radius: 1rem;
+    height: 14px;
+    line-height: 14px;
   }
 }
 </style>
