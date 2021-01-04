@@ -11,7 +11,9 @@
       </div>
       <div class="headerbar-right" v-show="classif">
         <div class="navigation" v-show="navation">
-          <i class="iconfont icon-sevice"></i>
+          <router-link to="/customer">
+            <i class="iconfont icon-sevice"></i>
+          </router-link>
         </div>
         <div class="navigation headerbar-menu-toggle">
           <i class="iconfont icon-icon-test1" @click="iconFenlei" ></i>

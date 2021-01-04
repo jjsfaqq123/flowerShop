@@ -47,18 +47,10 @@ import load from "@/components/common/gameLoading";
 export default {
   data() {
     return {
-     loading:false,
-     time:0,
-      Intervals:null
+   
     }
   },
-  beforeRouteLeave(to,from,next) {
-
-    next()
-  },
-  beforeRouteEnter(to,from,next) {
-    next()
-  },
+  
    
   components:{
     headBox,

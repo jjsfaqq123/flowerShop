@@ -9,8 +9,7 @@
 export default {
   data() {
     return {
-    Intervals:null,
-     
+      Intervals:null,
       time:0,
       loading:true,
     }
@@ -20,9 +19,11 @@ export default {
   },
   methods: {
      setLoading() {
+      
       this.Intervals = setInterval(() => {
       this.time++;
       if(this.time > 10) {
+         console.log(1);
         clearInterval(this.Intervals);
         this.loading = false
       }

@@ -72,7 +72,7 @@ export default {
 <style lang="less" scoped>
 .product{
   margin-top: 0.57142857rem;
-  background: #fff;
+  background: #F3F5F7;
   padding-bottom: 1.42857143rem;
   .product-title {
     font-size: 1.14285714rem;
@@ -125,6 +125,9 @@ img {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.product-item-horizontal {
+  margin-bottom: 10px;
 }
 .product-item.product-item-horizontal .product-item-info-promo {
   margin-top: 0.85714286rem;

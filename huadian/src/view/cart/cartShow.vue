@@ -25,11 +25,11 @@
                                         <span>数量</span>
                                         <div class="cart-item-setnum">
                                             <span class="btn-cut">
-                                                <i class="iconfont icon-iconfontdelete" ></i>
+                                                <i :class="cuts" ></i>
                                             </span>
-                                            <input type="text" name="" id="" value="1" class="num-count">
+                                            <input type="text" name="" id="" value="counts" class="num-count" v-model="counts">
                                             <span class="btn-add">
-                                                <i class="iconfont icon-icon10"></i>
+                                                <i class="iconfont icon-icon10"  @click="plus(index)"></i>
                                             </span>
                                         </div>
                                      </div>
@@ -68,7 +68,9 @@ export default {
             icons:'iconfont icon-checkbox',
             objNum:{},
             price:0,
-            itemArr :[]
+            itemArr :[],
+            cuts: 'iconfont icon-iconfontdelete',
+            counts:1,
         }
     },
     methods:{
@@ -79,21 +81,21 @@ export default {
             if(this.objNum[index] == true) {
                 this.$delete(this.objNum, index)
                 this.count--;
+                var s = []
                 // this.itemArr.pop(item.flowers_blodprice);
                 for(var i=0;i<this.itemArr.length;i++) {
-                     console.log(i)
-                    this.itemArr.splice(i,1);
-                    
+                    this.itemArr.splice(this.itemArr.length-1,1);
+                   
                 }
-                 console.log(index)
-                // if(this.itemArr.length!=0){
-                //     this.price = this.itemArr.reduce(function(prev,elem) {
-                //         console.log(prev,elem)
-                //         return prev-elem;
-                //     },this.price)
-                // }else {
-                //     this.price = 0
-                // }
+                console.log(this.itemArr)
+                if(this.itemArr.length!=0){
+                    this.price = this.itemArr.reduce(function(prev,elem) {
+                        console.log(prev,elem)
+                        return prev-elem;
+                    })
+                }else {
+                    this.price = 0
+                }
             }else {
                 this.$set(this.objNum,index,true);
                 this.icons ='iconfont icon-gouxuan'  
@@ -104,6 +106,17 @@ export default {
                 })
             }
           
+        },
+        //实现加号功能
+        plus(index) {
+            if(index) {
+                
+            }
+          
+            if(this.counts>1) {
+                this.cuts = 'iconfont icon-jianhao';    
+              
+            }
         }
     },
     computed: {

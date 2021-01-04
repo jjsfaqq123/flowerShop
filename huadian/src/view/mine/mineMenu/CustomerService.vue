@@ -24,7 +24,7 @@
         <div class="head">
             <div class="head-inp">
                 <van-cell-group>
-                    <van-field v-model="value"  placeholder="请输入用户名"  autosize />
+                    <van-field v-model="value"  placeholder="请输入用户名"  autosize @keyup.enter="sends()"/>
                     <van-button type="primary" style="display:line" @click="sends()">发送</van-button>
                 </van-cell-group>
             </div>

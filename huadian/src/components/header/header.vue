@@ -10,7 +10,7 @@
         <img src="@/assets/img/header/m_hualogo.png" alt="">
       </div>
       <div class="headerbar-right">
-        <i class="iconfont icon-sevice"></i>
+        <i class="iconfont icon-sevice" @click="cus"></i>
       </div>
     </header>
   </div>
@@ -18,7 +18,16 @@
 
 <script>
 export default {
+  data() {
+    return {
 
+    }
+  },
+  methods: {
+    cus() {
+      this.$router.push('/customer')
+    }
+  }
 }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div >
-    <headBox title="登录注册" to="mine"  classif='classif'></headBox>
+    <headBox title="登录注册" to="/"  classif='classif'></headBox>
     <div class="hualogo ">
       <img src="@/assets/img/mine/wx_login_logo.png" alt="">
     </div>
@@ -8,7 +8,7 @@
       <div class="login-item" v-if="Login==0">
         <div class="login-item-title" >用户名</div>
         <div class="login-item-info">
-          <input type="text" placeholder="请输入用户名" v-model="phone" minlength="5" maxlength="5">
+          <input type="text" placeholder="请输入用户名" v-model="phone" minlength="5" maxlength="5" @keyup.enter="userLogin">
           <div class="login-item-info-icon">
             <i class="iconfont icon-shanchu" @click="empty"></i>
         </div>
@@ -18,7 +18,7 @@
       <div class="login-item" v-if="Login==1">
         <div class="login-item-title" >用户名</div>
         <div class="login-item-info">
-          <input type="text" placeholder="请输入用户名" v-model="phoneEmail">
+          <input type="text" placeholder="请输入用户名" v-model="phoneEmail" >
           <div class="login-item-info-icon">
             <i class="iconfont icon-shanchu" @click="empty"></i>
         </div>
@@ -27,7 +27,7 @@
       <div class="login-item" v-if="Login==0" >
         <div class="login-item-title">密码</div>
         <div class="login-item-info">
-          <input type="text" placeholder="请输入密码 " maxlength="6" v-model="captcha">
+          <input type="text" placeholder="请输入密码 " maxlength="6" v-model="captcha" @keyup.enter="userLogin">
         </div>
       </div>
         <div class="login-item-info" v-if="Login==0" style="margin-top:20px;justify-content: space-between;">
@@ -103,9 +103,23 @@ export default {
   //     }
   //   }
   // },
+  created() {
+    this.cookes();
+  },
   methods: {
-    account() {
-     if(!this.Login) {
+    //获取cookie信息
+    cookes() {
+      console.log(document.cookie)
+      var unameUpwd = document.cookie;
+      var sp = unameUpwd.split(',');
+     if(unameUpwd!=null){
+      this.phone = sp[0];
+      this.captcha = base64.decode(sp[1]);
+      this.checked =Boolean(sp[2])
+     }
+    },
+    account() { 
+     if(!this.Login) { 
       this.accountSms = '用户名密码注册'
       this.cellPhone = '登录'
       this.Login = 1;
@@ -169,7 +183,12 @@ export default {
        this.$toast(res.data.msg)
        this.$router.push('/')
        sessionStorage.setItem("loginKey",base64.encode(res.data.loginKey))
-       this.$store.state.loginKey = res.data.loginKey
+       this.$store.state.loginKey = res.data.loginKey;
+       if(this.checked == true) {
+         document.cookie =this.phone+','+base64.encode(this.captcha)+','+this.checked;
+       }else {
+         document.cookie = null;
+       }
      }else {
         this.$toast(res.data.msg)
      }
